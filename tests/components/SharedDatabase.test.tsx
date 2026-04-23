@@ -58,7 +58,7 @@ describe("SharedDatabase section", () => {
     expect(h2).not.toBeNull();
     expect(h2!.textContent).toContain("Pantries, grocery-store supply partners");
     expect(h2!.textContent).toContain("One map");
-    expect(h2!.textContent).toContain("one table");
+    expect(h2!.textContent).toContain("one database");
   });
 
   test("composes the single FilterChips surface", () => {

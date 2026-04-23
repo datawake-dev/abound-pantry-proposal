@@ -191,9 +191,9 @@ export const SITE: Site = {
     headline: [
       { text: "Pantries, grocery-store supply partners, and family resource centers. " },
       { text: "One map", accent: "teal" },
-      { text: " and one table." },
+      { text: " and one database." },
     ],
-    body: "Church and community pantries, school shelves, mobile markets, appointment hubs, family resource centers, and the grocery stores supplying them. The map and the table are two views of the same records. Filter by capability. Export to CSV. Query the public read API. Participation is open to any food distribution site in the network.",
+    body: "Church and community pantries, school shelves, mobile markets, appointment hubs, family resource centers, and the grocery stores supplying them. The map and the data table are two views of the same underlying database. Filter by capability. Export to CSV. Query the public read API. Participation is open to any food distribution site in the network.",
     hints: [
       "Hover a row to highlight its map dot",
       "Tab focuses rows; Enter or Space sorts on a column header",
