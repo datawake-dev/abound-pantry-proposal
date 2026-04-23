@@ -81,6 +81,12 @@ if (typeof globalThis.matchMedia === "undefined") {
   });
 }
 
+// scrollIntoView — jsdom doesn't implement it. cmdk uses it when the
+// selected item changes. Stub it to a no-op.
+if (typeof Element !== "undefined" && !Element.prototype.scrollIntoView) {
+  Element.prototype.scrollIntoView = function () {};
+}
+
 afterEach(() => {
   cleanup();
 });
