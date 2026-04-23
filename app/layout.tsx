@@ -7,8 +7,20 @@ import { ScrollRestoration } from "@/components/ui/ScrollRestoration";
 // constant so the static analyzer can see it is not user-derived content
 // (no interpolation, no external inputs) before it reaches the inline
 // <script> tag below.
+//
+// The scrollIntoView no-op shim neutralizes libraries (notably cmdk, which
+// auto-selects its first item on mount and calls scrollIntoView on it) that
+// would otherwise scroll the document past the hero during hydration. Hash
+// navigation uses the browser's native anchor scroll, which does not go
+// through Element.prototype.scrollIntoView, so deep links still work.
 const SCROLL_RESET_SCRIPT =
-  "try{if('scrollRestoration' in history){history.scrollRestoration='manual'}if(!location.hash){window.scrollTo(0,0)}}catch(e){}";
+  "try{" +
+    "if('scrollRestoration' in history){history.scrollRestoration='manual'}" +
+    "if(!location.hash){window.scrollTo(0,0)}" +
+    "var _siv=Element.prototype.scrollIntoView;" +
+    "Element.prototype.scrollIntoView=function(){};" +
+    "setTimeout(function(){Element.prototype.scrollIntoView=_siv},900);" +
+  "}catch(e){}";
 
 // DESIGN.md §2.1 — font trinity:
 // Geist (display), DM Sans (body), Geist Mono (metadata/labels)
@@ -75,7 +87,6 @@ export default function RootLayout({
             scroll offset by then. The static content comes from a literal
             constant above. */}
         <script
-          // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: SCROLL_RESET_SCRIPT }}
         />
       </head>

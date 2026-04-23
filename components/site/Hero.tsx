@@ -171,39 +171,45 @@ export default function Hero({ features }: { features: DistributionFeature[] }) 
               </div>
             </div>
 
-            {/* Right column — interactive map with gold overlap caption */}
+            {/* Right column — interactive map with gold overlap caption.
+                The caption is passed as the map's `overlay` prop so it
+                anchors inside the map bezel (not the whole figure, which
+                also contains the keyboard list, textual summary, and
+                disclaimer). That was why it used to hang into the body
+                copy below on narrower viewports. */}
             <m.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.7, delay: 0.6, ease: EASE_EDITORIAL }}
-              className="relative"
             >
-              <InteractiveMap features={features} />
-
-              {/* Gold overlap caption — reveals at t≈1800ms per DESIGN.md §5.5 step 9 */}
-              <m.div
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.56, delay: 1.8, ease: EASE_EDITORIAL }}
-                role="note"
-                aria-label="Overlap caption"
-                className="pointer-events-none absolute left-6 bottom-20 max-w-[320px] rounded-[calc(1.75rem-0.375rem)] bg-[var(--surface-card)]/92 p-4 ss-float-card"
-                style={{ backdropFilter: "blur(8px)" }}
-              >
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--brand-gold-light)] px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--brand-gold-dark)]">
-                  <span
-                    aria-hidden
-                    className="h-1.5 w-1.5 rounded-full bg-[var(--brand-gold)]"
-                  />
-                  {caption.metric}
-                </span>
-                <p
-                  className="mt-2 text-[13px] text-[var(--ink)]"
-                  style={{ fontFamily: "var(--font-body)" }}
-                >
-                  {caption.body}
-                </p>
-              </m.div>
+              <InteractiveMap
+                features={features}
+                overlay={
+                  <m.div
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.56, delay: 1.8, ease: EASE_EDITORIAL }}
+                    role="note"
+                    aria-label="Overlap caption"
+                    className="pointer-events-none absolute left-5 bottom-5 z-10 max-w-[320px] rounded-[calc(1.75rem-0.375rem)] bg-[var(--surface-card)]/92 p-4 ss-float-card"
+                    style={{ backdropFilter: "blur(8px)" }}
+                  >
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--brand-gold-light)] px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--brand-gold-dark)]">
+                      <span
+                        aria-hidden
+                        className="h-1.5 w-1.5 rounded-full bg-[var(--brand-gold)]"
+                      />
+                      {caption.metric}
+                    </span>
+                    <p
+                      className="mt-2 text-[13px] text-[var(--ink)]"
+                      style={{ fontFamily: "var(--font-body)" }}
+                    >
+                      {caption.body}
+                    </p>
+                  </m.div>
+                }
+              />
             </m.div>
           </div>
         </LazyMotion>

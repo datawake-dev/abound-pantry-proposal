@@ -103,9 +103,13 @@ describe("Hero section", () => {
     expect(groups).toHaveLength(0);
   });
 
-  test("renders the gold overlap caption with default (no filter) copy", () => {
+  test("renders the gold overlap caption with default (no filter) copy", async () => {
     renderHero();
-    const caption = screen.getByRole("note", { name: /overlap caption/i });
+    // The caption is rendered as the InteractiveMap's `overlay` prop so it
+    // anchors inside the map bezel (not the full figure). InteractiveMap is
+    // dynamically imported with ssr:false, so the caption arrives after the
+    // dynamic import resolves — findByRole waits for that.
+    const caption = await screen.findByRole("note", { name: /overlap caption/i });
     expect(caption).toBeInTheDocument();
     expect(caption.textContent).toContain("Sat 9:00am");
     // The caption was reworded away from "The system cannot see this" to a

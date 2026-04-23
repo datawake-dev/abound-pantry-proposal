@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, type ReactNode } from "react";
 import { createRoot, type Root } from "react-dom/client";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
@@ -40,6 +40,13 @@ const POSITRON_STYLE = "https://tiles.openfreemap.org/styles/positron";
 
 export interface InteractiveMapProps {
   features: DistributionFeature[];
+  /**
+   * Optional absolute-positioned overlay rendered inside the map's inner
+   * bezel. Use for callouts (e.g. the hero's "Sat 9:00am" overlap caption)
+   * that must anchor to the map frame and not to the full figure (which
+   * includes the keyboard list, textual summary, and disclaimer below).
+   */
+  overlay?: ReactNode;
 }
 
 // MapLibre's FilterSpecification type is a deep union that TS narrows poorly
@@ -73,7 +80,7 @@ function toMapLibreFilter(activeFilters: Set<FilterKey>): unknown[] | null {
   return all.length ? ["all", ...all] : null;
 }
 
-export function InteractiveMap({ features }: InteractiveMapProps) {
+export function InteractiveMap({ features, overlay }: InteractiveMapProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   const popupRef = useRef<maplibregl.Popup | null>(null);
@@ -448,6 +455,11 @@ export function InteractiveMap({ features }: InteractiveMapProps) {
               className="sr-only"
             />
           ) : null}
+
+          {/* Optional caller-provided overlay (e.g. Hero's overlap caption).
+              Rendered inside the map bezel so absolute-positioned children
+              anchor to the map frame, not to the full figure. */}
+          {overlay}
         </div>
       </div>
 
