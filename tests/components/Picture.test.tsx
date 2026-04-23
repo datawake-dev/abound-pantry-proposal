@@ -9,10 +9,10 @@ describe("Picture section", () => {
     expect(document.getElementById("picture-h2")?.tagName).toBe("H2");
   });
 
-  test("scenario tool renders 3 pantry checkboxes", () => {
+  test("renders the density heat map with an accessible role", () => {
     render(<Picture />);
-    const checkboxes = screen.getAllByRole("checkbox");
-    expect(checkboxes.length).toBe(3);
+    const map = screen.getByRole("img", { name: /density heat map/i });
+    expect(map).toBeInTheDocument();
   });
 
   test("representative-projection tag is present in body", () => {
@@ -20,9 +20,9 @@ describe("Picture section", () => {
     expect(screen.getByText(/representative projection/i)).toBeInTheDocument();
   });
 
-  test("renders scenario metrics with 3 entries tagged representative", () => {
+  test("renders 3 AI nudge actions", () => {
     render(<Picture />);
-    const metrics = screen.getByTestId("scenario-metrics").querySelectorAll("li");
-    expect(metrics.length).toBe(3);
+    const actions = screen.getByTestId("nudge-actions").querySelectorAll("li");
+    expect(actions.length).toBe(3);
   });
 });

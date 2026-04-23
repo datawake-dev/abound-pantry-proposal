@@ -56,8 +56,9 @@ describe("SharedDatabase section", () => {
     // Headline is split across spans with teal accent — assert the H2 text content.
     const h2 = document.getElementById("shared-database-h2");
     expect(h2).not.toBeNull();
-    expect(h2!.textContent).toContain("Every distribution, every week.");
-    expect(h2!.textContent).toContain("One source");
+    expect(h2!.textContent).toContain("Pantries, grocery-store supply partners");
+    expect(h2!.textContent).toContain("One map");
+    expect(h2!.textContent).toContain("source of truth");
   });
 
   test("composes the single FilterChips surface", () => {

@@ -104,12 +104,15 @@ describe("Hero section", () => {
     expect(groups).toHaveLength(0);
   });
 
-  test("renders the gold overlap caption note", () => {
+  test("renders the gold overlap caption with default (no filter) copy", () => {
     renderHero();
     const caption = screen.getByRole("note", { name: /overlap caption/i });
     expect(caption).toBeInTheDocument();
     expect(caption.textContent).toContain("Sat 9:00am");
-    expect(caption.textContent).toContain("The system cannot see this");
+    // With no filters active, caption should NOT say "system cannot see this" —
+    // that phrase was replaced with a live-state description of the overlap.
+    expect(caption.textContent).not.toContain("system cannot see this");
+    expect(caption.textContent).toContain("Three pantries");
   });
 
   test("renders eyebrow 'Coordination infrastructure'", () => {

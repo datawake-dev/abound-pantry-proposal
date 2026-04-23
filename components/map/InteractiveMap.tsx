@@ -168,6 +168,8 @@ export function InteractiveMap({ features }: InteractiveMapProps) {
             "case",
             ["==", ["get", "isOverlap"], true],
             "#D4A843",
+            ["==", ["get", "type"], "supplier"],
+            "#3A4758",
             "#0C7C8A",
           ],
           "circle-stroke-width": 2,

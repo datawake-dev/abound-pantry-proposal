@@ -8,10 +8,10 @@ const fc = JSON.parse(
 ) as DistributionFeatureCollection;
 
 describe("Anaheim GeoJSON", () => {
-  test("FeatureCollection of Points with 15–25 features", () => {
+  test("FeatureCollection of Points with 50–120 features", () => {
     expect(fc.type).toBe("FeatureCollection");
-    expect(fc.features.length).toBeGreaterThanOrEqual(15);
-    expect(fc.features.length).toBeLessThanOrEqual(25);
+    expect(fc.features.length).toBeGreaterThanOrEqual(50);
+    expect(fc.features.length).toBeLessThanOrEqual(120);
     for (const f of fc.features) expect(f.geometry.type).toBe("Point");
   });
 
@@ -20,7 +20,14 @@ describe("Anaheim GeoJSON", () => {
       const p = f.properties;
       expect(p.id).toMatch(/^[\w-]+$/);
       expect(p.name.length).toBeGreaterThan(3);
-      expect(["pantry", "frc", "school", "mobile", "appointment"]).toContain(p.type);
+      expect([
+        "pantry",
+        "frc",
+        "school",
+        "mobile",
+        "appointment",
+        "supplier",
+      ]).toContain(p.type);
       expect(["open", "partial", "full", "closed"]).toContain(p.capacityLabel);
       expect(["box", "choice"]).toContain(p.model);
       expect(Array.isArray(p.storage)).toBe(true);

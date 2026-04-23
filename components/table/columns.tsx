@@ -12,6 +12,7 @@ const TYPE_LABEL: Record<DistributionType, string> = {
   school: "School",
   mobile: "Mobile",
   appointment: "Appt",
+  supplier: "Supplier",
 };
 
 const CAPACITY_META: Record<

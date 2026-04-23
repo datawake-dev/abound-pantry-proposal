@@ -89,11 +89,6 @@ export interface ScopeCopy {
   headline: string;
   bullets: Array<{ label: string; body: string }>;
   timeline: Array<{ when: string; what: string }>;
-  budget: {
-    build: string;
-    maintenance: string;
-    note: string;
-  };
 }
 
 export interface FooterCopy {
@@ -124,25 +119,25 @@ export interface LiveStateCopy extends SimpleSectionCopy {
   caption: string;
 }
 
-export interface PictureScenarioRow {
-  name: string;
-  time: string;
-  storage: string;
-}
-
-export interface PictureMetricRow {
-  label: string;
-  detail: string;
+export interface HeatMapNudgeAction {
+  site: string;
+  action: string;
 }
 
 export interface PictureCopy extends SimpleSectionCopy {
-  scenario: {
+  heatMap: {
     heading: string;
-    pantries: PictureScenarioRow[];
-    proposed: string;
-    metrics: PictureMetricRow[];
-    compareLabel: string;
+    legendLow: string;
+    legendHigh: string;
+    overlayLabel: string;
     disclaimer: string;
+  };
+  nudge: {
+    heading: string;
+    summary: string;
+    actions: HeatMapNudgeAction[];
+    ctaLabel: string;
+    rationale: string;
   };
 }
 
@@ -188,8 +183,8 @@ export const SITE: Site = {
       { label: "How it works", href: "#coordination", variant: "secondary" },
     ],
     overlapCaption: {
-      metric: "Sat 9:00am · 3 pantries · 300 m",
-      body: "The system cannot see this.",
+      metric: "Sat 9:00am overlap",
+      body: "Three pantries within 300m of each other, same morning. The coordination layer surfaces this automatically.",
       disclaimer: "Representative demo data. Live coordination layer in development.",
     },
   },
@@ -197,11 +192,11 @@ export const SITE: Site = {
   sharedDatabase: {
     eyebrow: "The shared database",
     headline: [
-      { text: "Every distribution, every week. " },
-      { text: "One source", accent: "teal" },
-      { text: " of truth." },
+      { text: "Pantries, grocery-store supply partners, and family resource centers. " },
+      { text: "One map", accent: "teal" },
+      { text: ", one source of truth." },
     ],
-    body: "The map is one view of this data. The table is another. Same 20 representative Anaheim distribution sites, same filter state. Sort any column. Filter by capability. Export to CSV. Query via the public API.",
+    body: "Church and community pantries, school shelves, mobile markets, appointment hubs, and the grocery stores supplying them. All in one record, every week. The map is one view of this data. The table is another. Same sites, same filter state. Sort any column. Filter by capability. Export to CSV. Query via the public API.",
     hints: [
       "Hover a row to highlight its map dot",
       "Tab focuses rows; Enter or Space sorts on a column header",
@@ -220,29 +215,42 @@ export const SITE: Site = {
   picture: {
     eyebrow: "The picture",
     headline: "One shared picture, used by coalition leaders.",
-    body: "A coalition planner opens the view on Sunday night. Heat map layered with SNAP density and school homeless rosters. The AI strategic brief pulled gap and overlap patterns from the week prior and ranked three consolidation candidates in plain English. Central Anaheim Saturday morning is the top one: three overlapping church pantries within walking distance, a 32 percent projected coverage lift (representative projection) if they consolidate into a single choice-market model at the FRC. The planner opens the scenario tool, ticks the three pantries, previews the projected family reach and walking-distance impact, and saves the scenario for comment. On Monday morning the Abound dispatch team sees it in the console with the planner's reasoning attached. Two weeks later the three pantry leads are in a room together. The tool does not decide. It makes the decision visible.",
-    scenario: {
-      heading: "Scenario · Consolidation preview",
-      pantries: [
-        { name: "First Baptist Lincoln", time: "Sat 9–11 am", storage: "Dry + cold" },
-        { name: "St. Luke's Lutheran", time: "Sat 9–11 am", storage: "Dry" },
-        { name: "Community Presbyterian", time: "Sat 10 am–12 pm", storage: "Dry" },
+    body: "A coalition planner opens the view on Sunday night. A heat map layered with SNAP density, school homeless rosters, and the week's distribution calendar shows where supply is concentrated and where it is thin. The AI strategic brief ranks the overlaps and gaps in plain English, and proposes specific nudges to pantry owners: move a Saturday 9am distribution by 90 minutes, merge two neighboring church pantries, cover the 92804 Wednesday afternoon hole. No forced consolidation. The planner sends the nudge as a conversation, not a directive. Two weeks later the three pantry leads are in a room together. The tool does not decide. It makes the decision visible (representative projection).",
+    heatMap: {
+      heading: "Heat map · Central Anaheim",
+      legendLow: "Thin coverage",
+      legendHigh: "Dense overlap",
+      overlayLabel: "Saturday 9am",
+      disclaimer: "Representative density layout. Live heat map ships in V1.",
+    },
+    nudge: {
+      heading: "AI nudge · Saturday 9am cluster",
+      summary:
+        "Three church pantries are open within a 300m radius on Saturday 9am. Meanwhile 92804 Wednesday afternoon has no coverage at all.",
+      actions: [
+        {
+          site: "St. Luke's Lutheran",
+          action: "Shift to Sunday 9am. Covers 92804 Wednesday hole. Box-to-choice upgrade.",
+        },
+        {
+          site: "Community Presbyterian",
+          action: "Merge into Anaheim FRC Sat 9am choice market. Same block, more capacity.",
+        },
+        {
+          site: "First Baptist Lincoln",
+          action: "Hold Saturday 9am. Anchor site with the best cold storage.",
+        },
       ],
-      proposed: "Proposed: Anaheim FRC, Sat 9 am–12 pm (choice market)",
-      metrics: [
-        { label: "Combined family reach", detail: "(representative)" },
-        { label: "Supply concentration", detail: "(representative)" },
-        { label: "Walk-distance impact", detail: "(representative)" },
-      ],
-      compareLabel: "Compare before and after",
-      disclaimer: "Projected values shown are representative for this layout. Live scenario modeling ships in V1.",
+      ctaLabel: "Send as conversation",
+      rationale:
+        "The planner is not sending orders. The platform drafts a short message to each pantry lead explaining the suggestion and asking if it would work. The pantry decides. The coordination layer just made the pattern visible.",
     },
   },
 
   coordination: {
     eyebrow: "Coordination without a login",
-    headline: "Pantries stay in their inbox.",
-    body: "Hundreds of operators run the distribution network. Almost none of them want another app. Sunday night the platform sends each site a short message asking for the week ahead. The operator replies with capacity, specific needs, and any schedule changes in plain language. The AI parses the reply, updates both the site profile and the individual distribution state, and confirms back to the operator. Mid-week when Abound routes supply, the operator gets a text with the estimated composition and ETA. After the distribution the operator replies with the served count. The loop runs on the channels operators already use.",
+    headline: "Pantries finally see their neighborhood.",
+    body: "For the first time, each pantry sees who else is distributing on their block, on their Saturday morning, and which supplies are moving where. They can tell the network what they are short on this week: pasta, diapers, cold storage, bilingual volunteers. That visibility is what earns the operator's time. Sunday night the platform sends each site a short message asking for the week ahead. The operator replies with capacity, specific needs, and any schedule changes in plain language. The AI parses the reply, updates both the site profile and the individual distribution state, and confirms back to the operator. Mid-week when Abound routes supply, the operator gets a text with the estimated composition and ETA. After the distribution the operator replies with the served count. The loop runs on the channels operators already use. No login, no app to install.",
     exchangeLabel: "Sample exchange · representative",
     bubbles: [
       {
@@ -384,7 +392,7 @@ export const SITE: Site = {
   },
 
   scope: {
-    eyebrow: "V1 scope, timeline, budget",
+    eyebrow: "V1 scope and timeline",
     headline: "What the first release delivers.",
     bullets: [
       {
@@ -401,7 +409,7 @@ export const SITE: Site = {
       },
       {
         label: "Strategic planner view",
-        body: "Heat map, weekly AI brief, scenario tool for modeling consolidations before acting.",
+        body: "Heat map, weekly AI brief, planner-authored nudges to pantries suggesting they move or merge times and locations.",
       },
       {
         label: "Case-manager search",
@@ -426,11 +434,6 @@ export const SITE: Site = {
       { when: "Month 6", what: "Full V1: Abound console, planner view, public API." },
       { when: "Ongoing", what: "Maintenance, partner onboarding, quarterly release cycle." },
     ],
-    budget: {
-      build: "$100–200K build",
-      maintenance: "$100K maintenance over three years",
-      note: "Line item inside Abound's grant application.",
-    },
   },
 
   footer: {

@@ -400,6 +400,873 @@
         "specificNeeds": ["frozen meals", "evening slot"],
         "isOverlap": false
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.8964, 33.8418] },
+      "properties": {
+        "id": "st-boniface-catholic",
+        "name": "St. Boniface Catholic",
+        "neighborhood": "Downtown",
+        "type": "pantry",
+        "nextDistribution": "Wed 4–6 pm",
+        "nextDistributionIso": "2026-04-29T16:00:00-07:00",
+        "storage": ["dry", "cold"],
+        "model": "choice",
+        "capacityLabel": "open",
+        "specificNeeds": ["fresh produce", "spanish-speaking volunteer"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.9421, 33.8489] },
+      "properties": {
+        "id": "magnolia-baptist-pantry",
+        "name": "Magnolia Baptist Church Pantry",
+        "neighborhood": "West Anaheim",
+        "type": "pantry",
+        "nextDistribution": "Sat 10 am–12 pm",
+        "nextDistributionIso": "2026-04-25T10:00:00-07:00",
+        "storage": ["dry"],
+        "model": "box",
+        "capacityLabel": "partial",
+        "specificNeeds": ["pasta", "canned protein"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.8548, 33.8609] },
+      "properties": {
+        "id": "grace-chinese-baptist",
+        "name": "Grace Chinese Baptist",
+        "neighborhood": "East Anaheim",
+        "type": "pantry",
+        "nextDistribution": "Sun 1–3 pm",
+        "nextDistributionIso": "2026-04-26T13:00:00-07:00",
+        "storage": ["dry"],
+        "model": "choice",
+        "capacityLabel": "open",
+        "specificNeeds": ["rice", "cantonese-speaking volunteer"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.9183, 33.8207] },
+      "properties": {
+        "id": "immanuel-lutheran-south",
+        "name": "Immanuel Lutheran Anaheim",
+        "neighborhood": "South Anaheim",
+        "type": "pantry",
+        "nextDistribution": "Thu 5–7 pm",
+        "nextDistributionIso": "2026-04-23T17:00:00-07:00",
+        "storage": ["dry", "cold"],
+        "model": "choice",
+        "capacityLabel": "open",
+        "specificNeeds": ["diapers", "infant formula"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.9618, 33.8335] },
+      "properties": {
+        "id": "brookhurst-community-church",
+        "name": "Brookhurst Community Church",
+        "neighborhood": "West Anaheim",
+        "type": "pantry",
+        "nextDistribution": "Tue 4–6 pm",
+        "nextDistributionIso": "2026-04-28T16:00:00-07:00",
+        "storage": ["dry", "cold"],
+        "model": "choice",
+        "capacityLabel": "partial",
+        "specificNeeds": ["beans", "senior bags"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.9087, 33.8451] },
+      "properties": {
+        "id": "bethel-ame-anaheim",
+        "name": "Bethel AME Fellowship Hall",
+        "neighborhood": "Central Anaheim",
+        "type": "pantry",
+        "nextDistribution": "Sat 11 am–1 pm",
+        "nextDistributionIso": "2026-04-25T11:00:00-07:00",
+        "storage": ["dry"],
+        "model": "box",
+        "capacityLabel": "open",
+        "specificNeeds": ["infant formula", "cereal"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.9736, 33.8283] },
+      "properties": {
+        "id": "anaheim-pentecostal-pantry",
+        "name": "Anaheim Pentecostal Pantry",
+        "neighborhood": "West Anaheim",
+        "type": "pantry",
+        "nextDistribution": "Fri 5–7 pm",
+        "nextDistributionIso": "2026-04-24T17:00:00-07:00",
+        "storage": ["dry"],
+        "model": "box",
+        "capacityLabel": "closed",
+        "specificNeeds": ["protein", "walk-up line"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.9245, 33.7982] },
+      "properties": {
+        "id": "iglesia-bautista-anaheim",
+        "name": "Iglesia Bautista Anaheim",
+        "neighborhood": "South Anaheim",
+        "type": "pantry",
+        "nextDistribution": "Sat 8–10 am",
+        "nextDistributionIso": "2026-04-25T08:00:00-07:00",
+        "storage": ["dry", "cold"],
+        "model": "choice",
+        "capacityLabel": "open",
+        "specificNeeds": ["fresh produce", "spanish-speaking volunteer"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.7528, 33.8813] },
+      "properties": {
+        "id": "vineyard-christian-fellowship",
+        "name": "Vineyard Christian Fellowship",
+        "neighborhood": "Anaheim Hills East",
+        "type": "pantry",
+        "nextDistribution": "Wed 6–8 pm",
+        "nextDistributionIso": "2026-04-29T18:00:00-07:00",
+        "storage": ["dry"],
+        "model": "box",
+        "capacityLabel": "partial",
+        "specificNeeds": ["grain", "family sized"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.8903, 33.8068] },
+      "properties": {
+        "id": "calvary-community-platinum",
+        "name": "Calvary Community Church",
+        "neighborhood": "Platinum Triangle",
+        "type": "pantry",
+        "nextDistribution": "Mon 6–8 pm",
+        "nextDistributionIso": "2026-04-27T18:00:00-07:00",
+        "storage": ["dry", "cold"],
+        "model": "choice",
+        "capacityLabel": "open",
+        "specificNeeds": ["evening slot", "transit stop"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.8756, 33.8398] },
+      "properties": {
+        "id": "anaheim-korean-church",
+        "name": "Anaheim Korean Methodist",
+        "neighborhood": "East Anaheim",
+        "type": "pantry",
+        "nextDistribution": "Sun 11 am–1 pm",
+        "nextDistributionIso": "2026-04-26T11:00:00-07:00",
+        "storage": ["dry"],
+        "model": "box",
+        "capacityLabel": "open",
+        "specificNeeds": ["rice", "korean-speaking volunteer"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.9552, 33.8516] },
+      "properties": {
+        "id": "cerritos-avenue-pantry",
+        "name": "Cerritos Avenue Community Pantry",
+        "neighborhood": "West Anaheim",
+        "type": "pantry",
+        "nextDistribution": "Tue 10 am–12 pm",
+        "nextDistributionIso": "2026-04-28T10:00:00-07:00",
+        "storage": ["dry", "cold"],
+        "model": "choice",
+        "capacityLabel": "open",
+        "specificNeeds": ["dairy", "fresh eggs"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.9012, 33.8276] },
+      "properties": {
+        "id": "holy-trinity-episcopal",
+        "name": "Holy Trinity Episcopal",
+        "neighborhood": "Central Anaheim",
+        "type": "pantry",
+        "nextDistribution": "Thu 11 am–1 pm",
+        "nextDistributionIso": "2026-04-23T11:00:00-07:00",
+        "storage": ["dry"],
+        "model": "choice",
+        "capacityLabel": "partial",
+        "specificNeeds": ["senior bags", "low-sodium options"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.8845, 33.8592] },
+      "properties": {
+        "id": "st-catherine-catholic",
+        "name": "St. Catherine Catholic Hall",
+        "neighborhood": "East Anaheim",
+        "type": "pantry",
+        "nextDistribution": "Fri 10 am–12 pm",
+        "nextDistributionIso": "2026-04-24T10:00:00-07:00",
+        "storage": ["dry", "cold"],
+        "model": "choice",
+        "capacityLabel": "open",
+        "specificNeeds": ["spanish-speaking volunteer", "fresh produce"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.9481, 33.8367] },
+      "properties": {
+        "id": "loara-elementary-shelf",
+        "name": "Loara Elementary Shelf",
+        "neighborhood": "West Anaheim",
+        "type": "school",
+        "nextDistribution": "Wed 2:45–4 pm",
+        "nextDistributionIso": "2026-04-29T14:45:00-07:00",
+        "storage": ["dry"],
+        "model": "box",
+        "capacityLabel": "open",
+        "specificNeeds": ["after-school pickup", "family bags"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.9165, 33.8428] },
+      "properties": {
+        "id": "anaheim-high-market",
+        "name": "Anaheim High School Market",
+        "neighborhood": "Downtown",
+        "type": "school",
+        "nextDistribution": "Tue 3–5 pm",
+        "nextDistributionIso": "2026-04-28T15:00:00-07:00",
+        "storage": ["dry", "cold"],
+        "model": "choice",
+        "capacityLabel": "open",
+        "specificNeeds": ["student ID optional", "bilingual staff"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.9174, 33.8031] },
+      "properties": {
+        "id": "katella-high-shelf",
+        "name": "Katella High Shelf",
+        "neighborhood": "Anaheim Resort",
+        "type": "school",
+        "nextDistribution": "Thu 2:30–4 pm",
+        "nextDistributionIso": "2026-04-23T14:30:00-07:00",
+        "storage": ["dry"],
+        "model": "choice",
+        "capacityLabel": "partial",
+        "specificNeeds": ["teen pantry", "snacks"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.9702, 33.8398] },
+      "properties": {
+        "id": "magnolia-high-pantry",
+        "name": "Magnolia High Pantry",
+        "neighborhood": "West Anaheim",
+        "type": "school",
+        "nextDistribution": "Fri 3–4:30 pm",
+        "nextDistributionIso": "2026-04-24T15:00:00-07:00",
+        "storage": ["dry"],
+        "model": "box",
+        "capacityLabel": "open",
+        "specificNeeds": ["teen pantry", "walkable location"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.8718, 33.8446] },
+      "properties": {
+        "id": "sunkist-elementary-shelf",
+        "name": "Sunkist Elementary Shelf",
+        "neighborhood": "East Anaheim",
+        "type": "school",
+        "nextDistribution": "Wed 3–4 pm",
+        "nextDistributionIso": "2026-04-29T15:00:00-07:00",
+        "storage": ["dry"],
+        "model": "box",
+        "capacityLabel": "open",
+        "specificNeeds": ["after-school pickup", "snacks"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.9648, 33.8232] },
+      "properties": {
+        "id": "west-anaheim-frc",
+        "name": "West Anaheim Family Resource Center",
+        "neighborhood": "West Anaheim",
+        "type": "frc",
+        "nextDistribution": "Mon 9 am–12 pm",
+        "nextDistributionIso": "2026-04-27T09:00:00-07:00",
+        "storage": ["dry", "cold"],
+        "model": "choice",
+        "capacityLabel": "open",
+        "specificNeeds": ["benefits help", "multilingual intake"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.7486, 33.8689] },
+      "properties": {
+        "id": "anaheim-hills-frc",
+        "name": "Anaheim Hills Family Resource Center",
+        "neighborhood": "Anaheim Hills East",
+        "type": "frc",
+        "nextDistribution": "Wed 1–4 pm",
+        "nextDistributionIso": "2026-04-29T13:00:00-07:00",
+        "storage": ["dry", "cold"],
+        "model": "choice",
+        "capacityLabel": "partial",
+        "specificNeeds": ["housing referral", "senior bags"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.8864, 33.8082] },
+      "properties": {
+        "id": "platinum-triangle-frc",
+        "name": "Platinum Triangle Family Resource Center",
+        "neighborhood": "Platinum Triangle",
+        "type": "frc",
+        "nextDistribution": "Thu 2–5 pm",
+        "nextDistributionIso": "2026-04-23T14:00:00-07:00",
+        "storage": ["dry"],
+        "model": "box",
+        "capacityLabel": "open",
+        "specificNeeds": ["case management", "evening slot"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.9052, 33.8334] },
+      "properties": {
+        "id": "lincoln-ave-mobile-pantry",
+        "name": "Lincoln Ave Mobile Pantry",
+        "neighborhood": "Central Anaheim",
+        "type": "mobile",
+        "nextDistribution": "Wed 11 am–1 pm",
+        "nextDistributionIso": "2026-04-29T11:00:00-07:00",
+        "storage": ["cold"],
+        "model": "box",
+        "capacityLabel": "open",
+        "specificNeeds": ["fresh produce", "dairy"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.9156, 33.8044] },
+      "properties": {
+        "id": "harbor-blvd-fresh-stop",
+        "name": "Harbor Blvd Fresh Stop",
+        "neighborhood": "Anaheim Resort",
+        "type": "mobile",
+        "nextDistribution": "Fri 12–2 pm",
+        "nextDistributionIso": "2026-04-24T12:00:00-07:00",
+        "storage": ["cold"],
+        "model": "choice",
+        "capacityLabel": "open",
+        "specificNeeds": ["hotel workers", "evening produce"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.9514, 33.8491] },
+      "properties": {
+        "id": "euclid-mobile-market",
+        "name": "Euclid Mobile Market",
+        "neighborhood": "West Anaheim",
+        "type": "mobile",
+        "nextDistribution": "Sat 2–4 pm",
+        "nextDistributionIso": "2026-04-25T14:00:00-07:00",
+        "storage": ["dry", "cold"],
+        "model": "choice",
+        "capacityLabel": "partial",
+        "specificNeeds": ["weekend slot", "fresh produce"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.8298, 33.8523] },
+      "properties": {
+        "id": "east-st-cold-route",
+        "name": "East Street Cold Route Van",
+        "neighborhood": "East Anaheim",
+        "type": "mobile",
+        "nextDistribution": "Tue 6–8 pm",
+        "nextDistributionIso": "2026-04-28T18:00:00-07:00",
+        "storage": ["cold"],
+        "model": "box",
+        "capacityLabel": "full",
+        "specificNeeds": ["frozen meals", "late shift pickup"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.9234, 33.8063] },
+      "properties": {
+        "id": "ball-rd-evening-van",
+        "name": "Ball Rd Evening Van",
+        "neighborhood": "South Anaheim",
+        "type": "mobile",
+        "nextDistribution": "Thu 7–9 pm",
+        "nextDistributionIso": "2026-04-23T19:00:00-07:00",
+        "storage": ["cold"],
+        "model": "box",
+        "capacityLabel": "open",
+        "specificNeeds": ["late shift pickup", "protein"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.9068, 33.8385] },
+      "properties": {
+        "id": "nutmeg-family-services",
+        "name": "Nutmeg Family Services",
+        "neighborhood": "Central Anaheim",
+        "type": "appointment",
+        "nextDistribution": "Mon 10 am–2 pm",
+        "nextDistributionIso": "2026-04-27T10:00:00-07:00",
+        "storage": ["dry"],
+        "model": "choice",
+        "capacityLabel": "open",
+        "specificNeeds": ["case management", "document help"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.9708, 33.8312] },
+      "properties": {
+        "id": "crescent-street-case-desk",
+        "name": "Crescent Street Case Desk",
+        "neighborhood": "West Anaheim",
+        "type": "appointment",
+        "nextDistribution": "Wed 9 am–12 pm",
+        "nextDistributionIso": "2026-04-29T09:00:00-07:00",
+        "storage": ["dry"],
+        "model": "choice",
+        "capacityLabel": "partial",
+        "specificNeeds": ["housing referral", "quiet check-in"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.9138, 33.8023] },
+      "properties": {
+        "id": "orangewood-senior-desk",
+        "name": "Orangewood Senior Desk",
+        "neighborhood": "South Anaheim",
+        "type": "appointment",
+        "nextDistribution": "Fri 1–4 pm",
+        "nextDistributionIso": "2026-04-24T13:00:00-07:00",
+        "storage": ["dry", "cold"],
+        "model": "choice",
+        "capacityLabel": "open",
+        "specificNeeds": ["senior bags", "low-sodium options"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.8442, 33.8687] },
+      "properties": {
+        "id": "east-anaheim-family-help",
+        "name": "East Anaheim Family Help Desk",
+        "neighborhood": "East Anaheim",
+        "type": "appointment",
+        "nextDistribution": "Thu 10 am–1 pm",
+        "nextDistributionIso": "2026-04-23T10:00:00-07:00",
+        "storage": ["dry"],
+        "model": "choice",
+        "capacityLabel": "open",
+        "specificNeeds": ["stroller access", "spanish-speaking volunteer"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.7312, 33.8795] },
+      "properties": {
+        "id": "hills-senior-care-desk",
+        "name": "Hills Senior Care Desk",
+        "neighborhood": "Anaheim Hills East",
+        "type": "appointment",
+        "nextDistribution": "Tue 10 am–2 pm",
+        "nextDistributionIso": "2026-04-28T10:00:00-07:00",
+        "storage": ["dry"],
+        "model": "choice",
+        "capacityLabel": "partial",
+        "specificNeeds": ["senior bags", "document help"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.7843, 33.8602] },
+      "properties": {
+        "id": "ralphs-brea-anaheim",
+        "name": "Ralphs Brea-Anaheim",
+        "neighborhood": "East Anaheim",
+        "type": "supplier",
+        "nextDistribution": "Daily 6 am pickup",
+        "nextDistributionIso": "2026-04-23T06:00:00-07:00",
+        "storage": ["dry", "cold"],
+        "model": "box",
+        "capacityLabel": "open",
+        "specificNeeds": ["protein", "dairy", "fresh produce"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.7394, 33.8712] },
+      "properties": {
+        "id": "albertsons-anaheim-hills",
+        "name": "Albertsons Anaheim Hills",
+        "neighborhood": "Anaheim Hills East",
+        "type": "supplier",
+        "nextDistribution": "Daily 7 am pickup",
+        "nextDistributionIso": "2026-04-23T07:00:00-07:00",
+        "storage": ["dry", "cold"],
+        "model": "box",
+        "capacityLabel": "open",
+        "specificNeeds": ["fresh produce", "bakery", "cold route"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.9112, 33.8319] },
+      "properties": {
+        "id": "food-4-less-downtown",
+        "name": "Food 4 Less Downtown Anaheim",
+        "neighborhood": "Downtown",
+        "type": "supplier",
+        "nextDistribution": "Mon, Wed, Fri 7 am",
+        "nextDistributionIso": "2026-04-27T07:00:00-07:00",
+        "storage": ["dry", "cold"],
+        "model": "box",
+        "capacityLabel": "open",
+        "specificNeeds": ["canned protein", "pasta", "rice"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.9681, 33.8454] },
+      "properties": {
+        "id": "northgate-gonzalez-market",
+        "name": "Northgate González Market",
+        "neighborhood": "West Anaheim",
+        "type": "supplier",
+        "nextDistribution": "Tue, Thu 6:30 am",
+        "nextDistributionIso": "2026-04-28T06:30:00-07:00",
+        "storage": ["dry", "cold"],
+        "model": "box",
+        "capacityLabel": "open",
+        "specificNeeds": ["fresh produce", "bakery", "masa"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.9005, 33.8612] },
+      "properties": {
+        "id": "smart-final-state-college",
+        "name": "Smart & Final State College",
+        "neighborhood": "Central Anaheim",
+        "type": "supplier",
+        "nextDistribution": "Daily 6:30 am",
+        "nextDistributionIso": "2026-04-23T06:30:00-07:00",
+        "storage": ["dry"],
+        "model": "box",
+        "capacityLabel": "open",
+        "specificNeeds": ["bulk dry goods", "pasta", "beans"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.8572, 33.8572] },
+      "properties": {
+        "id": "vons-lincoln-ave",
+        "name": "Vons Lincoln Ave",
+        "neighborhood": "East Anaheim",
+        "type": "supplier",
+        "nextDistribution": "Mon-Sat 7 am",
+        "nextDistributionIso": "2026-04-27T07:00:00-07:00",
+        "storage": ["dry", "cold"],
+        "model": "box",
+        "capacityLabel": "partial",
+        "specificNeeds": ["bakery", "dairy", "protein"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.9582, 33.8418] },
+      "properties": {
+        "id": "stater-bros-magnolia",
+        "name": "Stater Bros Magnolia",
+        "neighborhood": "West Anaheim",
+        "type": "supplier",
+        "nextDistribution": "Wed, Fri 7 am",
+        "nextDistributionIso": "2026-04-29T07:00:00-07:00",
+        "storage": ["dry", "cold"],
+        "model": "box",
+        "capacityLabel": "open",
+        "specificNeeds": ["fresh produce", "dairy"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.9198, 33.8052] },
+      "properties": {
+        "id": "super-a-foods-anaheim",
+        "name": "Super A Foods Anaheim",
+        "neighborhood": "South Anaheim",
+        "type": "supplier",
+        "nextDistribution": "Tue, Sat 6 am",
+        "nextDistributionIso": "2026-04-28T06:00:00-07:00",
+        "storage": ["dry", "cold"],
+        "model": "box",
+        "capacityLabel": "open",
+        "specificNeeds": ["fresh produce", "masa", "mexican staples"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.9041, 33.8511] },
+      "properties": {
+        "id": "sprouts-anaheim-plaza",
+        "name": "Sprouts Anaheim Plaza",
+        "neighborhood": "Central Anaheim",
+        "type": "supplier",
+        "nextDistribution": "Daily 5:30 am",
+        "nextDistributionIso": "2026-04-23T05:30:00-07:00",
+        "storage": ["dry", "cold"],
+        "model": "box",
+        "capacityLabel": "open",
+        "specificNeeds": ["organic produce", "bakery"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.7452, 33.8688] },
+      "properties": {
+        "id": "trader-joes-anaheim-hills",
+        "name": "Trader Joe's Anaheim Hills",
+        "neighborhood": "Anaheim Hills East",
+        "type": "supplier",
+        "nextDistribution": "Wed, Sun 6 am",
+        "nextDistributionIso": "2026-04-29T06:00:00-07:00",
+        "storage": ["dry", "cold"],
+        "model": "box",
+        "capacityLabel": "open",
+        "specificNeeds": ["bakery", "dairy", "frozen meals"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.8852, 33.8005] },
+      "properties": {
+        "id": "costco-business-anaheim",
+        "name": "Costco Business Center Anaheim",
+        "neighborhood": "Platinum Triangle",
+        "type": "supplier",
+        "nextDistribution": "Tue, Thu 5 am",
+        "nextDistributionIso": "2026-04-28T05:00:00-07:00",
+        "storage": ["dry", "cold"],
+        "model": "box",
+        "capacityLabel": "open",
+        "specificNeeds": ["bulk dry goods", "protein", "case-quantity"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.8887, 33.8133] },
+      "properties": {
+        "id": "restaurant-depot-anaheim",
+        "name": "Restaurant Depot Anaheim",
+        "neighborhood": "Platinum Triangle",
+        "type": "supplier",
+        "nextDistribution": "Mon, Wed, Fri 5 am",
+        "nextDistributionIso": "2026-04-27T05:00:00-07:00",
+        "storage": ["dry", "cold"],
+        "model": "box",
+        "capacityLabel": "partial",
+        "specificNeeds": ["bulk dry goods", "frozen meals"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.9072, 33.8172] },
+      "properties": {
+        "id": "anaheim-resort-lunch-route",
+        "name": "Anaheim Resort Lunch Route",
+        "neighborhood": "Anaheim Resort",
+        "type": "mobile",
+        "nextDistribution": "Mon-Fri 11:30 am",
+        "nextDistributionIso": "2026-04-27T11:30:00-07:00",
+        "storage": ["cold"],
+        "model": "box",
+        "capacityLabel": "open",
+        "specificNeeds": ["hotel workers", "kid friendly"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.8742, 33.8175] },
+      "properties": {
+        "id": "good-shepherd-anglican",
+        "name": "Good Shepherd Anglican",
+        "neighborhood": "Anaheim Hills East",
+        "type": "pantry",
+        "nextDistribution": "Sat 9–11 am",
+        "nextDistributionIso": "2026-04-25T09:00:00-07:00",
+        "storage": ["dry"],
+        "model": "box",
+        "capacityLabel": "partial",
+        "specificNeeds": ["grain", "canned protein"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.9416, 33.8145] },
+      "properties": {
+        "id": "south-anaheim-downtown-frc",
+        "name": "Downtown Anaheim Family Resource Center",
+        "neighborhood": "Downtown",
+        "type": "frc",
+        "nextDistribution": "Mon-Thu 10 am–5 pm",
+        "nextDistributionIso": "2026-04-27T10:00:00-07:00",
+        "storage": ["dry", "cold"],
+        "model": "choice",
+        "capacityLabel": "open",
+        "specificNeeds": ["benefits help", "stroller access", "case management"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.8205, 33.8793] },
+      "properties": {
+        "id": "canyon-community-church",
+        "name": "Canyon Community Church",
+        "neighborhood": "Anaheim Hills East",
+        "type": "pantry",
+        "nextDistribution": "Sun 10 am–12 pm",
+        "nextDistributionIso": "2026-04-26T10:00:00-07:00",
+        "storage": ["dry", "cold"],
+        "model": "choice",
+        "capacityLabel": "open",
+        "specificNeeds": ["fresh produce", "family bags"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.9325, 33.8248] },
+      "properties": {
+        "id": "south-junior-high-shelf",
+        "name": "South Junior High Shelf",
+        "neighborhood": "South Anaheim",
+        "type": "school",
+        "nextDistribution": "Thu 2:45–4 pm",
+        "nextDistributionIso": "2026-04-23T14:45:00-07:00",
+        "storage": ["dry"],
+        "model": "choice",
+        "capacityLabel": "open",
+        "specificNeeds": ["teen pantry", "snacks", "feminine care"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.9487, 33.8053] },
+      "properties": {
+        "id": "south-anaheim-mobile-cold",
+        "name": "South Anaheim Mobile Cold Stop",
+        "neighborhood": "South Anaheim",
+        "type": "mobile",
+        "nextDistribution": "Wed 5–7 pm",
+        "nextDistributionIso": "2026-04-29T17:00:00-07:00",
+        "storage": ["cold"],
+        "model": "box",
+        "capacityLabel": "open",
+        "specificNeeds": ["dairy", "fresh produce", "evening slot"],
+        "isOverlap": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-117.9625, 33.8688] },
+      "properties": {
+        "id": "savanna-high-pantry",
+        "name": "Savanna High Pantry",
+        "neighborhood": "West Anaheim",
+        "type": "school",
+        "nextDistribution": "Tue 3–4:30 pm",
+        "nextDistributionIso": "2026-04-28T15:00:00-07:00",
+        "storage": ["dry"],
+        "model": "box",
+        "capacityLabel": "partial",
+        "specificNeeds": ["teen pantry", "student ID optional"],
+        "isOverlap": false
+      }
     }
   ]
 }

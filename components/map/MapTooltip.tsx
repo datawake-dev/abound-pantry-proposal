@@ -14,6 +14,7 @@ const TYPE_LABEL: Record<DistributionFeature["properties"]["type"], string> = {
   school: "School pantry",
   mobile: "Mobile distribution",
   appointment: "Appointment-based",
+  supplier: "Grocery supply partner",
 };
 
 export interface MapTooltipProps {

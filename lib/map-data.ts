@@ -1,6 +1,12 @@
 import type { Feature, FeatureCollection, Point } from "geojson";
 
-export type DistributionType = "pantry" | "frc" | "school" | "mobile" | "appointment";
+export type DistributionType =
+  | "pantry"
+  | "frc"
+  | "school"
+  | "mobile"
+  | "appointment"
+  | "supplier";
 export type CapacityLabel = "open" | "partial" | "full" | "closed";
 export type DistributionModel = "box" | "choice";
 export type StorageCapability = "dry" | "cold";

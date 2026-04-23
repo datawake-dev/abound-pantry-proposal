@@ -24,10 +24,4 @@ describe("Scope section", () => {
     expect(dds.length).toBe(4);
   });
 
-  test("budget numbers render in font-sans (Geist) not body", () => {
-    render(<Scope />);
-    const build = screen.getByTestId("budget-build");
-    expect(build.textContent).toContain("$100");
-    expect(build.getAttribute("style")).toContain("--font-sans");
-  });
 });

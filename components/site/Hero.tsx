@@ -2,8 +2,43 @@
 import { ArrowRight, ArrowDown } from "@phosphor-icons/react/dist/ssr";
 import { LazyMotion, domAnimation, m } from "motion/react";
 import dynamic from "next/dynamic";
+import { useMemo } from "react";
 import type { DistributionFeature } from "@/lib/map-data";
+import { useFilterContext } from "@/lib/filter-context";
+import { applyFilters, type FilterKey } from "@/lib/map-filters";
 import { SITE } from "@/lib/site-data";
+
+const FILTER_LABEL: Record<FilterKey, string> = {
+  "open-today": "Capacity open",
+  "cold-storage": "Cold storage",
+  "choice-market": "Choice market",
+  "needs-dry-goods": "Needs dry goods",
+  "overlap-flagged": "Overlap flagged",
+};
+
+function deriveCaption(
+  activeFilters: Set<FilterKey>,
+  filteredCount: number,
+  totalCount: number,
+): { metric: string; body: string } {
+  if (activeFilters.size === 0) {
+    return {
+      metric: SITE.hero.overlapCaption.metric,
+      body: SITE.hero.overlapCaption.body,
+    };
+  }
+  const labels = Array.from(activeFilters).map((k) => FILTER_LABEL[k]);
+  const metric =
+    activeFilters.size === 1
+      ? labels[0]
+      : `${activeFilters.size} filters · ${labels.join(" + ")}`;
+  const plural = filteredCount === 1 ? "site" : "sites";
+  const body =
+    filteredCount === 0
+      ? `No ${plural} match right now. Adjust filters below.`
+      : `${filteredCount} of ${totalCount} ${plural} match. Adjust filters below.`;
+  return { metric, body };
+}
 
 // Defer MapLibre GL JS out of the initial bundle. The hero reveal timeline
 // fades the map in at t=600ms anyway (DESIGN.md §5.5 step 6), so pushing the
@@ -28,6 +63,12 @@ const EASE_EDITORIAL = [0.32, 0.72, 0, 1] as const;
 
 export default function Hero({ features }: { features: DistributionFeature[] }) {
   const copy = SITE.hero;
+  const { state } = useFilterContext();
+  const caption = useMemo(
+    () =>
+      deriveCaption(state.active, applyFilters(features, state).length, features.length),
+    [state, features],
+  );
 
   return (
     <section
@@ -154,13 +195,13 @@ export default function Hero({ features }: { features: DistributionFeature[] }) 
                     aria-hidden
                     className="h-1.5 w-1.5 rounded-full bg-[var(--brand-gold)]"
                   />
-                  {copy.overlapCaption.metric}
+                  {caption.metric}
                 </span>
                 <p
                   className="mt-2 text-[13px] text-[var(--ink)]"
                   style={{ fontFamily: "var(--font-body)" }}
                 >
-                  {copy.overlapCaption.body}
+                  {caption.body}
                 </p>
               </m.div>
             </m.div>

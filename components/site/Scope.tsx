@@ -50,57 +50,30 @@ export default function Scope() {
               ))}
             </ul>
 
-            {/* Right 4 col — timeline + budget */}
-            <div className="space-y-6">
-              <div>
-                <p className="font-mono text-[9.5px] uppercase tracking-[0.18em] text-[var(--ink-muted)]">
-                  Timeline
-                </p>
-                <dl
-                  className="mt-4 space-y-3"
-                  data-testid="scope-timeline"
-                  style={{ fontFamily: "var(--font-body)" }}
-                >
-                  {copy.timeline.map((row) => (
-                    <div
-                      key={row.when}
-                      className="grid grid-cols-[max-content_1fr] gap-x-4 gap-y-0 border-b border-[var(--rule-cool)] pb-3 last:border-b-0"
-                    >
-                      <dt className="font-medium text-[13px] text-[var(--ink)] tabular">
-                        {row.when}
-                      </dt>
-                      <dd className="text-[13px] text-[var(--ink-muted)]">
-                        {row.what}
-                      </dd>
-                    </div>
-                  ))}
-                </dl>
-              </div>
-
-              <div className="rounded-[1.75rem] bg-[rgba(10,10,11,0.04)] p-1.5 ring-1 ring-[rgba(10,10,11,0.06)]">
-                <div className="rounded-[calc(1.75rem-0.375rem)] bg-[var(--surface-card)] p-6 ss-float-card">
-                  <p className="font-mono text-[9.5px] uppercase tracking-[0.18em] text-[var(--ink-muted)]">
-                    Budget
-                  </p>
-                  <p
-                    className="mt-4 text-[clamp(1.5rem,2.4vw,1.875rem)] font-semibold leading-none tracking-[-0.025em] text-[var(--brand-primary)] tabular"
-                    data-testid="budget-build"
-                    style={{ fontFamily: "var(--font-sans)" }}
+            {/* Right 4 col — timeline */}
+            <div>
+              <p className="font-mono text-[9.5px] uppercase tracking-[0.18em] text-[var(--ink-muted)]">
+                Timeline
+              </p>
+              <dl
+                className="mt-4 space-y-3"
+                data-testid="scope-timeline"
+                style={{ fontFamily: "var(--font-body)" }}
+              >
+                {copy.timeline.map((row) => (
+                  <div
+                    key={row.when}
+                    className="grid grid-cols-[max-content_1fr] gap-x-4 gap-y-0 border-b border-[var(--rule-cool)] pb-3 last:border-b-0"
                   >
-                    {copy.budget.build}
-                  </p>
-                  <p
-                    className="mt-3 text-[clamp(1.5rem,2.4vw,1.875rem)] font-semibold leading-none tracking-[-0.025em] text-[var(--brand-primary)] tabular"
-                    data-testid="budget-maintenance"
-                    style={{ fontFamily: "var(--font-sans)" }}
-                  >
-                    {copy.budget.maintenance}
-                  </p>
-                  <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--ink-faint)]">
-                    {copy.budget.note}
-                  </p>
-                </div>
-              </div>
+                    <dt className="font-medium text-[13px] text-[var(--ink)] tabular">
+                      {row.when}
+                    </dt>
+                    <dd className="text-[13px] text-[var(--ink-muted)]">
+                      {row.what}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
             </div>
           </div>
       </div>
