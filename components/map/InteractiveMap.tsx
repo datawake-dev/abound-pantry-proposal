@@ -158,6 +158,76 @@ export function InteractiveMap({ features }: InteractiveMapProps) {
         },
       });
 
+      // Heat layer — renders coverage density across the Anaheim bounds so a
+      // viewer reads "hot spots + cool spots" at a glance before drilling
+      // into individual dots. Cool (transparent teal) at low density, warm
+      // (gold) at high density. Sits beneath the dots layer so specific
+      // sites remain visible.
+      map.addLayer({
+        id: "heat",
+        type: "heatmap",
+        source: "distributions",
+        maxzoom: 15,
+        paint: {
+          "heatmap-weight": [
+            "case",
+            ["==", ["get", "isOverlap"], true],
+            1.4,
+            ["==", ["get", "type"], "supplier"],
+            0.6,
+            1,
+          ],
+          "heatmap-intensity": [
+            "interpolate",
+            ["linear"],
+            ["zoom"],
+            10,
+            1,
+            15,
+            2.2,
+          ],
+          "heatmap-color": [
+            "interpolate",
+            ["linear"],
+            ["heatmap-density"],
+            0,
+            "rgba(12, 124, 138, 0)",
+            0.15,
+            "rgba(12, 124, 138, 0.22)",
+            0.35,
+            "rgba(12, 124, 138, 0.42)",
+            0.55,
+            "rgba(90, 146, 138, 0.58)",
+            0.75,
+            "rgba(212, 168, 67, 0.68)",
+            1,
+            "rgba(212, 168, 67, 0.82)",
+          ],
+          "heatmap-radius": [
+            "interpolate",
+            ["linear"],
+            ["zoom"],
+            10,
+            28,
+            12,
+            44,
+            15,
+            70,
+          ],
+          "heatmap-opacity": [
+            "interpolate",
+            ["linear"],
+            ["zoom"],
+            10,
+            0.8,
+            14,
+            0.7,
+            15,
+            0.5,
+          ],
+        },
+      });
+
       map.addLayer({
         id: "dots",
         type: "circle",
@@ -196,10 +266,16 @@ export function InteractiveMap({ features }: InteractiveMapProps) {
         },
       });
 
-      // Apply any filter toggled before style load finished.
+      // Apply any filter toggled before style load finished. Both the dots
+      // and the heat layer read the same filter expression so the heatmap
+      // narrows to match whatever the chips select.
       const initial = toMapLibreFilter(activeFiltersRef.current);
       map.setFilter(
         "dots",
+        initial as unknown as maplibregl.FilterSpecification,
+      );
+      map.setFilter(
+        "heat",
         initial as unknown as maplibregl.FilterSpecification,
       );
 
@@ -275,7 +351,9 @@ export function InteractiveMap({ features }: InteractiveMapProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Filter updates → MapLibre layer filter.
+  // Filter updates → MapLibre layer filter. Both the dots and the heat
+  // layer track the same filter expression so the heatmap reflects the
+  // currently selected chips.
   useEffect(() => {
     const map = mapRef.current;
     if (!map || !styleLoadedRef.current || !map.getLayer("dots")) return;
@@ -284,6 +362,12 @@ export function InteractiveMap({ features }: InteractiveMapProps) {
       "dots",
       layerFilter as unknown as maplibregl.FilterSpecification,
     );
+    if (map.getLayer("heat")) {
+      map.setFilter(
+        "heat",
+        layerFilter as unknown as maplibregl.FilterSpecification,
+      );
+    }
   }, [state]);
 
   // Highlight updates → MapLibre highlight layer filter. Using a MapLibre
