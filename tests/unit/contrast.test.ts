@@ -30,7 +30,7 @@ describe("WCAG contrast pairs from DESIGN.md §3.5", () => {
     expect(getContrastRatio("#856708", "#FFF8E7")).toBeGreaterThanOrEqual(4.5);
   });
 
-  test("paper on primary-dark — AAA (≥ 7:1) — CTA band inverse", () => {
+  test("paper on primary-dark — AAA (≥ 7:1) — inverse surface", () => {
     expect(getContrastRatio("#F7F6F3", "#085A66")).toBeGreaterThanOrEqual(7);
   });
 });

@@ -1,8 +1,8 @@
 /**
  * SITE — typed copy constants for the proposal site.
  *
- * Every string here is rendered to a grant reviewer, Victoria, Mike, or a
- * coalition partner. Rules (enforced by tests/unit/site-copy-lint.test.ts):
+ * Every string here is rendered to a grant reviewer or a coalition partner.
+ * Rules (enforced by tests/unit/site-copy-lint.test.ts):
  *
  * - No em dash as clause separator (use period or colon instead).
  * - No banned SaaS vocabulary (see lib/slop-lint.ts for the list).
@@ -23,7 +23,6 @@ export interface NavCopy {
   brand: string;
   proposalTag: string;
   links: Array<{ label: string; href: string }>;
-  cta: { label: string; href: string };
 }
 
 export interface HeroCopy {
@@ -97,13 +96,6 @@ export interface ScopeCopy {
   };
 }
 
-export interface CtaCopy {
-  eyebrow: string;
-  headline: string;
-  body: string;
-  ctas: Array<{ label: string; href: string; variant: "gold" | "outline" }>;
-}
-
 export interface FooterCopy {
   credit: string;
   disclaimer: string;
@@ -166,7 +158,6 @@ export interface Site {
   publicInfrastructure: PublicInfrastructureCopy;
   team: TeamCopy;
   scope: ScopeCopy;
-  cta: CtaCopy;
   footer: FooterCopy;
 }
 
@@ -179,7 +170,6 @@ export const SITE: Site = {
       { label: "How it works", href: "#coordination" },
       { label: "Scope", href: "#scope" },
     ],
-    cta: { label: "Contact", href: "#cta-band" },
   },
 
   hero: {
@@ -230,7 +220,7 @@ export const SITE: Site = {
   picture: {
     eyebrow: "The picture",
     headline: "One shared picture, used by coalition leaders.",
-    body: "Victoria opens the planner view on Sunday night. Heat map layered with SNAP density and school homeless rosters. The AI strategic brief pulled gap and overlap patterns from the week prior and ranked three consolidation candidates in plain English. Central Anaheim Saturday morning is the top one: three overlapping church pantries within walking distance, a 32 percent projected coverage lift (representative projection) if they consolidate into a single choice-market model at the FRC. She opens the scenario tool, ticks the three pantries, previews the projected family reach and walking-distance impact, and saves the scenario for comment. On Monday morning Mike sees it in the Abound console with the planner's reasoning attached. Two weeks later the three pantry leads are in a room together. The tool does not decide. It makes the decision visible.",
+    body: "A coalition planner opens the view on Sunday night. Heat map layered with SNAP density and school homeless rosters. The AI strategic brief pulled gap and overlap patterns from the week prior and ranked three consolidation candidates in plain English. Central Anaheim Saturday morning is the top one: three overlapping church pantries within walking distance, a 32 percent projected coverage lift (representative projection) if they consolidate into a single choice-market model at the FRC. The planner opens the scenario tool, ticks the three pantries, previews the projected family reach and walking-distance impact, and saves the scenario for comment. On Monday morning the Abound dispatch team sees it in the console with the planner's reasoning attached. Two weeks later the three pantry leads are in a room together. The tool does not decide. It makes the decision visible.",
     scenario: {
       heading: "Scenario · Consolidation preview",
       pantries: [
@@ -375,13 +365,13 @@ export const SITE: Site = {
       {
         name: "Abound Food Care",
         role: "Product owner · Grant applicant · Long-term operator",
-        body: "Hosts the Orange County instance. Owns the operational data, the pantry relationships, and the routing decisions. Mike's team opens the console each morning and is accountable for the network.",
+        body: "Hosts the Orange County instance. Owns the operational data, the pantry relationships, and the routing decisions. The Abound dispatch team opens the console each morning and is accountable for the network.",
         initials: "AFC",
       },
       {
         name: "A Million Dreams Consulting",
         role: "Co-product manager · Domain expert · Adoption lead",
-        body: "Victoria Torres. Coalition relationships across OC Hunger Alliance, 211 OC, CalOptima, and the school districts. Planner-view workflow design and rollout strategy.",
+        body: "Coalition relationships across OC Hunger Alliance, 211 OC, CalOptima, and the school districts. Planner-view workflow design and rollout strategy.",
         initials: "AMDC",
       },
       {
@@ -441,24 +431,6 @@ export const SITE: Site = {
       maintenance: "$100K maintenance over three years",
       note: "Line item inside Abound's grant application.",
     },
-  },
-
-  cta: {
-    eyebrow: "Next steps",
-    headline: "Let us build this together.",
-    body: "For Victoria: reply in the email thread with comments. For Mike: we have 9 am PT on Tuesday May 5 on the calendar.",
-    ctas: [
-      {
-        label: "Reply in the thread",
-        href: "mailto:mike@aboundfoodcare.org?subject=OC%20Pantry%20Coordination%20Proposal",
-        variant: "gold",
-      },
-      {
-        label: "Add to calendar",
-        href: "https://cal.com/datawake/abound-may-5",
-        variant: "outline",
-      },
-    ],
   },
 
   footer: {

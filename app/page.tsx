@@ -14,7 +14,6 @@ import CaseManager from "@/components/site/CaseManager";
 import PublicInfrastructure from "@/components/site/PublicInfrastructure";
 import Team from "@/components/site/Team";
 import Scope from "@/components/site/Scope";
-import CTA from "@/components/site/CTA";
 
 // Server Component: GeoJSON read once at render, passed to client components
 // via typed prop. No client-side fetch (PLAN-REVISIONS Task 9 invert-data-flow).
@@ -40,7 +39,6 @@ export default function Page() {
         <PublicInfrastructure />
         <Team />
         <Scope />
-        <CTA />
       </main>
       <Footer />
     </FilterProvider>

@@ -25,7 +25,6 @@ const stringsUnderSite = walkStrings(SITE);
 
 // Strings we intentionally exclude from slop-lint:
 // - href values containing mailto:/https: (URLs are not prose).
-// - the CTA band email is URL-encoded; slop rules don't apply to URL params.
 // The filter is path-based so it stays transparent in failure output.
 const HREF_PATHS = new Set(
   stringsUnderSite

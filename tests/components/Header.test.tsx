@@ -17,11 +17,6 @@ describe("Header (Floating Fluid Island)", () => {
     expect(hrefs).toEqual(["#picture", "#coordination", "#scope"]);
   });
 
-  test("Contact CTA points to #cta-band", () => {
-    render(<Header />);
-    expect(screen.getByTestId("nav-cta").getAttribute("href")).toBe("#cta-band");
-  });
-
   test("PROPOSAL tag present in wordmark region", () => {
     render(<Header />);
     expect(screen.getByText(/Proposal/)).toBeInTheDocument();
