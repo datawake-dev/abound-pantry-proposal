@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, DM_Sans } from "next/font/google";
 import "./globals.css";
+import { ScrollRestoration } from "@/components/ui/ScrollRestoration";
 
 // DESIGN.md §2.1 — font trinity:
 // Geist (display), DM Sans (body), Geist Mono (metadata/labels)
@@ -26,12 +27,12 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "OC Pantry Coordination Network: Proposal",
   description:
-    "Shared food-rescue data for Orange County. Open directory, live distribution state, public APIs. Built with Abound Food Care.",
+    "A coordination data layer for Orange County food distribution. Open pantry directory, weekly distribution schedule, public read APIs. Owned by Abound Food Care, built and maintained by Datawake.",
   robots: { index: true, follow: true },
   openGraph: {
     title: "OC Pantry Coordination Network: Proposal",
     description:
-      "Shared food-rescue data for Orange County. Built with Abound Food Care.",
+      "A coordination data layer for Orange County food distribution. Owned by Abound Food Care, built by Datawake.",
     type: "website",
   },
 };
@@ -61,6 +62,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://tiles.openfreemap.org" />
       </head>
       <body className="bg-surface-paper text-ink min-h-full flex flex-col">
+        <ScrollRestoration />
         {children}
       </body>
     </html>
