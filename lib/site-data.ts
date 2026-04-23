@@ -181,8 +181,8 @@ export const SITE: Site = {
     ctas: [],
     overlapCaption: {
       metric: "Sat 9:00am",
-      body: "Three pantries are scheduled to open within a 300m radius at the same hour, which is the kind of overlap pattern the planner view flags for coalition leaders to review.",
-      disclaimer: "The data shown is representative; the live coordination layer is in development.",
+      body: "Three pantries are scheduled to open within a 300m radius at the same hour, which is the kind of overlap pattern the planner view would flag for coalition leaders to review. The pantries shown here are fabricated for this demo.",
+      disclaimer: "Mock data only. Nothing on this page is in operation yet.",
     },
   },
 
@@ -435,6 +435,6 @@ export const SITE: Site = {
 
   footer: {
     credit: "",
-    disclaimer: "All distribution data shown is representative demo data, and the live coordination layer is still in development.",
+    disclaimer: "This site is a proposal demo. Every pantry, supplier, and distribution shown is fabricated; none of the names, addresses, or schedules refer to real Anaheim sites. The live coordination platform will ship with real data once Abound and the coalition agencies are on board.",
   },
 };

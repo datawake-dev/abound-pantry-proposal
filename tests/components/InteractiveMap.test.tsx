@@ -99,14 +99,14 @@ describe("InteractiveMap", () => {
     renderMap();
     const summary = document.querySelector("[data-slot=map-summary]");
     expect(summary).not.toBeNull();
-    expect(summary!.textContent).toContain("Representative distribution sites");
+    expect(summary!.textContent).toContain("fabricated");
     expect(summary!.textContent).toContain("Anaheim");
   });
 
-  test("renders representative disclaimer", () => {
+  test("renders mock-data disclaimer that makes the demo nature obvious", () => {
     renderMap();
     expect(
-      screen.getByText(/Representative demo data\. Live coordination layer/i),
+      screen.getByText(/Mock data only\. Nothing on this page is in operation/i),
     ).toBeInTheDocument();
   });
 

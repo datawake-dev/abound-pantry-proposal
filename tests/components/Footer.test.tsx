@@ -11,7 +11,10 @@ describe("Footer", () => {
   test("contains the disclaimer text", () => {
     render(<Footer />);
     expect(
-      screen.getByText(/representative demo data/i),
+      screen.getByText(/proposal demo/i),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/fabricated/i),
     ).toBeInTheDocument();
   });
 });

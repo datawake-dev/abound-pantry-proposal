@@ -500,19 +500,23 @@ export function InteractiveMap({ features }: InteractiveMapProps) {
         data-slot="map-summary"
       >
         <p>
-          Representative distribution sites in Anaheim.{" "}
+          This map shows fabricated distribution sites in Anaheim for the
+          purposes of this proposal demo.{" "}
           {overlapCount === 3 ? (
             <>
-              Three sites flagged as overlapping on Saturday 9 am in central
-              Anaheim.
+              Three sites are flagged as overlapping on Saturday 9 am in
+              central Anaheim to illustrate the kind of pattern the real
+              platform would catch.
             </>
           ) : overlapCount > 0 ? (
             <>
               {overlapCount} site{overlapCount === 1 ? " is" : "s are"} flagged
-              as overlapping.
+              as overlapping to illustrate the kind of pattern the real
+              platform would catch.
             </>
           ) : null}{" "}
-          Filter by capability below.
+          You can filter by capability below, but none of the pantry names,
+          addresses, or schedules refer to real Anaheim distributions.
         </p>
       </figcaption>
 
@@ -520,7 +524,7 @@ export function InteractiveMap({ features }: InteractiveMapProps) {
         className="mt-2 font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--ink-faint)]"
         data-slot="map-disclaimer"
       >
-        Representative demo data. Live coordination layer in development.
+        Mock data only. Nothing on this page is in operation yet.
       </p>
     </figure>
   );
