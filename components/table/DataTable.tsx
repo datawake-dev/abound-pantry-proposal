@@ -38,6 +38,54 @@ export interface DataTableProps {
   features: DistributionFeature[];
 }
 
+/**
+ * RFC 4180 CSV field: wrap in double quotes, escape embedded double quotes
+ * by doubling, and escape any CR/LF so arrays/needs with commas don't split
+ * rows.
+ */
+function csvField(v: unknown): string {
+  const s =
+    v == null
+      ? ""
+      : Array.isArray(v)
+        ? v.join("; ")
+        : typeof v === "boolean"
+          ? v
+            ? "yes"
+            : "no"
+          : String(v);
+  return `"${s.replace(/"/g, '""').replace(/\r?\n/g, " ")}"`;
+}
+
+function downloadCsv(rows: DistributionFeatureProperties[]): void {
+  const header = [
+    "id",
+    "name",
+    "neighborhood",
+    "type",
+    "nextDistribution",
+    "nextDistributionIso",
+    "storage",
+    "model",
+    "capacityLabel",
+    "specificNeeds",
+    "isOverlap",
+  ];
+  const body = rows.map((r) =>
+    header.map((k) => csvField((r as unknown as Record<string, unknown>)[k])).join(","),
+  );
+  const csv = [header.map(csvField).join(","), ...body].join("\n");
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "anaheim-distributions.csv";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
 export function DataTable({ features }: DataTableProps) {
   const { state, highlightedId, setHighlightedId } = useFilterContext();
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -191,12 +239,9 @@ export function DataTable({ features }: DataTableProps) {
         </span>
         <button
           type="button"
-          aria-label="Export filtered rows as CSV (mock, V1 will implement)"
+          aria-label="Export filtered rows as CSV"
           className="inline-flex items-center gap-1.5 rounded-full border border-[var(--rule-cool)] px-3 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--ink-muted)] transition-colors hover:border-[var(--brand-primary)] hover:text-[var(--brand-primary)]"
-          onClick={() => {
-            /* Export CSV is a V1 capability; the button signals the data is
-             * queryable, but the proposal site itself is static. */
-          }}
+          onClick={() => downloadCsv(filteredData)}
         >
           Export CSV
           <ArrowLineDown weight="light" className="h-3 w-3" aria-hidden />

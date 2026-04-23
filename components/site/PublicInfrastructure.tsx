@@ -1,6 +1,7 @@
 "use client";
+import { useState } from "react";
 import { LazyMotion, domAnimation, m } from "motion/react";
-import { GithubLogo, Copy } from "@phosphor-icons/react/dist/ssr";
+import { GithubLogo, Copy, Check } from "@phosphor-icons/react/dist/ssr";
 import { SITE } from "@/lib/site-data";
 
 /**
@@ -122,6 +123,31 @@ function TokenSpan({ token }: { token: Token }) {
 
 export default function PublicInfrastructure() {
   const copy = SITE.publicInfrastructure;
+  const [copied, setCopied] = useState(false);
+
+  const onCopyApi = async () => {
+    const payload = `${copy.apiRequest}\n\n${copy.apiResponse}`;
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(payload);
+      } else {
+        // Fallback for older browsers / insecure contexts.
+        const ta = document.createElement("textarea");
+        ta.value = payload;
+        ta.setAttribute("readonly", "");
+        ta.style.position = "absolute";
+        ta.style.left = "-9999px";
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+      }
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1800);
+    } catch {
+      // Silently fail; not a trust-breaking path for a static proposal site.
+    }
+  };
 
   return (
     <section
@@ -186,10 +212,20 @@ export default function PublicInfrastructure() {
                   </p>
                   <button
                     type="button"
-                    aria-label="Copy API sample to clipboard (mock)"
+                    onClick={onCopyApi}
+                    aria-label={
+                      copied
+                        ? "API sample copied to clipboard"
+                        : "Copy API sample to clipboard"
+                    }
+                    aria-live="polite"
                     className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-white/10 text-white/70 transition-colors hover:bg-white/20 hover:text-white"
                   >
-                    <Copy weight="light" className="h-3.5 w-3.5" aria-hidden />
+                    {copied ? (
+                      <Check weight="light" className="h-3.5 w-3.5" aria-hidden />
+                    ) : (
+                      <Copy weight="light" className="h-3.5 w-3.5" aria-hidden />
+                    )}
                   </button>
                 </div>
 
