@@ -1,130 +1,307 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "shadcn/tailwind.css";
 
-@custom-variant dark (&:is(.dark *));
+/*
+ * Soft Structuralism — OC Pantry Coordination Network Proposal Site
+ * Tokens derived from DESIGN.md v2 §2-5.
+ *
+ * Layer 1: Runtime semantic tokens in :root (§3.1)
+ * Layer 2: @theme inline exposes them to Tailwind utility generation
+ * No dark mode in v1 (DESIGN.md §3.2)
+ */
+
+/* ------------------------------------------------------------------ */
+/* Layer 1 — runtime semantic tokens                                  */
+/* ------------------------------------------------------------------ */
+
+:root {
+  /* Surfaces (DESIGN.md §3.1) */
+  --surface-paper: #F7F6F3;
+  --surface-card: #FFFFFF;
+  --surface-ink: #0A0A0B;
+  --surface-muted: #F2F1ED;
+
+  /* Brand — Datawake (DESIGN.md §3.1) */
+  --brand-primary: #0C7C8A;
+  --brand-primary-dark: #085A66;
+  --brand-primary-light: #E8F5F7;
+  --brand-gold: #D4A843;
+  --brand-gold-dark: #92710A;
+  --brand-gold-light: #FFF8E7;
+
+  /* Ink / neutrals (DESIGN.md §3.1) */
+  --ink: #0A0A0B;
+  --ink-heading-alt: #1C2D3A;
+  --ink-muted: #6B7280;
+  --ink-faint: #9CA3AF;
+  --rule-cool: #E6E5E0;
+  --rule-strong: #D7D5CE;
+
+  /* Status — semantic only (DESIGN.md §3.1) */
+  --status-open: #10B981;
+  --status-partial: #D4A843;
+  --status-full: #6B7280;
+  --status-closed: #9CA3AF;
+
+  /* Motion (DESIGN.md §5.2-5.3) */
+  --ease-editorial: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-gentle: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast: 140ms;
+  --dur-medium: 260ms;
+  --dur-slow: 560ms;
+  --dur-hero: 800ms;
+
+  /* Radius — Double-Bezel system (DESIGN.md §4.5) */
+  --radius-bezel-outer: 1.75rem;                        /* 28px */
+  --radius-bezel-inner: calc(1.75rem - 0.375rem);       /* 22px — concentric */
+  --radius: 0.625rem;
+
+  /* shadcn bridge vars (point at Soft Structuralism tokens) */
+  --background: var(--surface-paper);
+  --foreground: var(--ink);
+  --card: var(--surface-card);
+  --card-foreground: var(--ink);
+  --popover: var(--surface-card);
+  --popover-foreground: var(--ink);
+  --primary: var(--brand-primary);
+  --primary-foreground: #FFFFFF;
+  --secondary: var(--surface-muted);
+  --secondary-foreground: var(--ink);
+  --muted: var(--surface-muted);
+  --muted-foreground: var(--ink-muted);
+  --accent: var(--brand-primary-light);
+  --accent-foreground: var(--brand-primary-dark);
+  --destructive: #E05252;
+  --destructive-foreground: #FFFFFF;
+  --border: var(--rule-cool);
+  --input: var(--rule-cool);
+  --ring: var(--brand-primary);
+}
+
+/* ------------------------------------------------------------------ */
+/* Layer 2 — expose tokens to Tailwind utility generation             */
+/* ------------------------------------------------------------------ */
 
 @theme inline {
+  /* Surface family */
+  --color-surface-paper: var(--surface-paper);
+  --color-surface-card: var(--surface-card);
+  --color-surface-ink: var(--surface-ink);
+  --color-surface-muted: var(--surface-muted);
+
+  /* Brand family */
+  --color-brand-primary: var(--brand-primary);
+  --color-brand-primary-dark: var(--brand-primary-dark);
+  --color-brand-primary-light: var(--brand-primary-light);
+  --color-brand-gold: var(--brand-gold);
+  --color-brand-gold-dark: var(--brand-gold-dark);
+  --color-brand-gold-light: var(--brand-gold-light);
+
+  /* Ink family */
+  --color-ink: var(--ink);
+  --color-ink-heading-alt: var(--ink-heading-alt);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
+  --color-rule-cool: var(--rule-cool);
+  --color-rule-strong: var(--rule-strong);
+
+  /* Status family */
+  --color-status-open: var(--status-open);
+  --color-status-partial: var(--status-partial);
+  --color-status-full: var(--status-full);
+  --color-status-closed: var(--status-closed);
+
+  /* shadcn bridge surfaces */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Font stacks — Task 4 layout.tsx wires the Google font variables */
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-body: var(--font-dm-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+
+  /* Radius bridge */
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) * 1.4);
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-:root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+/* ------------------------------------------------------------------ */
+/* Base                                                               */
+/* ------------------------------------------------------------------ */
+
+html,
+body {
+  background: var(--surface-paper);
+  color: var(--ink);
 }
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+body {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.55;
+  letter-spacing: -0.002em;
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+/* Display headings use Geist (DESIGN.md §2.1) */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans);
+  color: var(--ink);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+/* Monospace tag / metadata voice (DESIGN.md §2.3) */
+.mono {
+  font-family: var(--font-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 0.688rem;
+}
+
+/* Tabular numerals utility (DESIGN.md §2.3) */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ------------------------------------------------------------------ */
+/* Atmospheric gradient utility (DESIGN.md §3.3)                      */
+/* The ONLY gradient in the entire site. One subtle teal radial per   */
+/* designated section. Not a blob, not a mesh, not a glow.            */
+/* ------------------------------------------------------------------ */
+
+.atmosphere-teal {
+  position: absolute;
+  top: -120px;
+  right: -80px;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(12, 124, 138, 0.04) 0%,
+    transparent 72%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ------------------------------------------------------------------ */
+/* Stacked ambient shadow system — site signature (DESIGN.md §5.4)    */
+/* Applied to: hero map, data table, partner cards, filter snapshot   */
+/* ------------------------------------------------------------------ */
+
+.ss-float-card {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 2px 4px rgba(15, 20, 30, 0.04),
+    0 20px 40px -20px rgba(15, 20, 30, 0.12),
+    0 40px 80px -40px rgba(15, 20, 30, 0.08);
+}
+
+/* ------------------------------------------------------------------ */
+/* Hero overlap cluster pulse (DESIGN.md §5.6)                        */
+/* 3 cycles then stops; reduced-motion disables via the media query   */
+/* below.                                                             */
+/* ------------------------------------------------------------------ */
+
+@keyframes ss-pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  65% {
+    transform: scale(2.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes ss-pulse-ring2 {
+  0% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  65% {
+    transform: scale(3.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+.ss-pulse-1 {
+  animation: ss-pulse-ring 2.4s var(--ease-editorial) 3 forwards;
+  transform-origin: center;
+}
+
+.ss-pulse-2 {
+  animation: ss-pulse-ring2 2.4s var(--ease-editorial) 0.6s 3 forwards;
+  transform-origin: center;
+}
+
+/* ------------------------------------------------------------------ */
+/* Reduced-motion (DESIGN.md §5.1, §11)                               */
+/* ------------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .atmosphere-teal {
+    display: none;
+  }
+  .ss-pulse-1,
+  .ss-pulse-2 {
+    animation: none;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Base layer defaults                                                */
+/* ------------------------------------------------------------------ */
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    border-color: var(--border);
   }
-  body {
-    @apply bg-background text-foreground;
-  }
-  html {
-    @apply font-sans;
+  *:focus-visible {
+    outline: 2px solid var(--brand-primary);
+    outline-offset: 2px;
   }
 }
