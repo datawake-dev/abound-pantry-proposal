@@ -55,12 +55,17 @@ export default function Hero({ features }: { features: DistributionFeature[] }) 
                 {copy.eyebrow}
               </m.span>
 
-              <m.h1
+              {/*
+                H1 uses a CSS animation (defined inline below) rather than a
+                Motion initial={opacity:0}. The H1 is the page's LCP element;
+                Motion's initial state would paint opacity:0 on SSR and block
+                LCP by the full delay+duration (~1s). Keeping opacity:1 from
+                first paint lets LCP fire immediately while a transform+blur
+                still carries the reveal feeling.
+              */}
+              <h1
                 id="hero-h1"
-                initial={{ opacity: 0, y: 16, filter: "blur(4px)" }}
-                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                transition={{ duration: 0.8, delay: 0.22, ease: EASE_EDITORIAL }}
-                className="mt-5 text-[clamp(2.8rem,5.2vw,4.25rem)] font-semibold leading-[1.0] tracking-[-0.04em]"
+                className="hero-h1-reveal mt-5 text-[clamp(2.8rem,5.2vw,4.25rem)] font-semibold leading-[1.0] tracking-[-0.04em]"
               >
                 {copy.headline.map((seg, i) => (
                   <span
@@ -70,7 +75,7 @@ export default function Hero({ features }: { features: DistributionFeature[] }) 
                     {seg.text}
                   </span>
                 ))}
-              </m.h1>
+              </h1>
 
               <m.p
                 initial={{ opacity: 0, y: 8, filter: "blur(3px)" }}

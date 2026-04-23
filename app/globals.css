@@ -225,6 +225,32 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ------------------------------------------------------------------ */
+/* Hero H1 reveal (CSS, not Motion) — LCP-safe                        */
+/*                                                                    */
+/* Motion's initial={opacity:0} paints opacity:0 in the SSR HTML,     */
+/* blocking LCP by the reveal duration. This CSS version keeps the    */
+/* element fully opaque from first paint and only animates            */
+/* transform + filter — so LCP fires immediately while the visual     */
+/* still slides/unblurs per DESIGN.md §5.5 step 3.                    */
+/* ------------------------------------------------------------------ */
+
+@keyframes hero-h1-reveal {
+  from {
+    transform: translateY(16px);
+    filter: blur(4px);
+  }
+  to {
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.hero-h1-reveal {
+  animation: hero-h1-reveal 800ms cubic-bezier(0.32, 0.72, 0, 1) 220ms both;
+  will-change: transform, filter;
+}
+
+/* ------------------------------------------------------------------ */
 /* Hero overlap cluster pulse (DESIGN.md §5.6)                        */
 /* 3 cycles then stops; reduced-motion disables via the media query   */
 /* below.                                                             */
