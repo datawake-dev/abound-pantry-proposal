@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { LazyMotion, domAnimation, m } from "motion/react";
 import { Command } from "cmdk";
 import { MagnifyingGlass, ArrowRight, CaretRight } from "@phosphor-icons/react/dist/ssr";
@@ -20,7 +20,29 @@ export default function CaseManager() {
   const copy = SITE.caseManager;
   const [query, setQuery] = useState(copy.queryPrefill);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-  const filteredCount = copy.results.length;
+
+  // Real token-substring filtering against the concatenated value string. We
+  // keep shouldFilter={false} on cmdk and own the match so (a) the filter is
+  // deterministic and testable, and (b) an empty query shows all results
+  // (cmdk's default would hide them when no query is set).
+  const visibleResults = useMemo(() => {
+    const tokens = query
+      .toLowerCase()
+      .split(/\s+/)
+      .map((t) => t.trim())
+      .filter(Boolean);
+    if (tokens.length === 0) {
+      return copy.results.map((r, i) => ({ result: r, index: i }));
+    }
+    return copy.results
+      .map((result, index) => ({ result, index }))
+      .filter(({ result }) => {
+        const haystack =
+          `${result.siteName} ${result.neighborhood} ${result.reasoning}`.toLowerCase();
+        return tokens.some((tok) => haystack.includes(tok));
+      });
+  }, [query, copy.results]);
+  const filteredCount = visibleResults.length;
 
   const panelHeadingRef = useRef<HTMLHeadingElement | null>(null);
   const originTriggerRef = useRef<HTMLElement | null>(null);
@@ -37,13 +59,29 @@ export default function CaseManager() {
     setSelectedIndex(index);
   };
 
-  const onCollapse = () => {
+  const onCollapse = useCallback(() => {
     setSelectedIndex(null);
     // Return focus to the originating trigger.
     requestAnimationFrame(() => {
       originTriggerRef.current?.focus();
     });
-  };
+  }, []);
+
+  // Global Escape handler when the detail panel is open. The Command component
+  // only catches Escape while focus is inside it; once focus moves to the
+  // panel heading, Escape stops reaching onKeyDown. A document listener
+  // scoped to the open state covers the rest.
+  useEffect(() => {
+    if (selectedIndex === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        onCollapse();
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [selectedIndex, onCollapse]);
 
   return (
     <section
@@ -120,7 +158,7 @@ export default function CaseManager() {
                     <Command.Empty className="py-6 text-center text-[13px] text-[var(--ink-muted)]">
                       No pantries match that query.
                     </Command.Empty>
-                    {copy.results.map((result, i) => (
+                    {visibleResults.map(({ result, index: i }) => (
                       <Command.Item
                         key={result.siteName}
                         value={`${result.siteName} ${result.neighborhood} ${result.reasoning}`}
