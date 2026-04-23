@@ -113,7 +113,7 @@ First sentence "Open directory." is DM Sans 600, `--ink`. Rest is DM Sans 400, `
 | `--brand-primary-dark` | `#085A66` | Hover/emphasis, eyebrow pill text |
 | `--brand-primary-light` | `#E8F5F7` | Tint backgrounds, secondary CTA nested-icon fill |
 | `--brand-gold` | `#D4A843` | Semantic flag ONLY — overlap cluster, high-need alert, CTA-band accent on deep-teal surfaces |
-| `--brand-gold-dark` | `#92710A` | Gold text on `--brand-gold-light` backgrounds |
+| `--brand-gold-dark` | `#856708` | Gold text on `--brand-gold-light` backgrounds (v2 fix: darkened from #92710A to meet WCAG AA 4.5:1) |
 | `--brand-gold-light` | `#FFF8E7` | Gold callout backgrounds, map overlap caption flag fill |
 
 **Ink / neutrals**
@@ -122,7 +122,7 @@ First sentence "Open directory." is DM Sans 600, `--ink`. Rest is DM Sans 400, `
 |---|---|---|
 | `--ink` | `#0A0A0B` | Default body text, headings, primary ink — near-black, not pure black (pure `#000000` is banned per `stitch-design-taste`) |
 | `--ink-heading-alt` | `#1C2D3A` | Reserve for cooler-ink emphasis where `--ink` would feel overweight — rare, document per-use |
-| `--ink-muted` | `#6B7280` | Secondary text, nav links, muted meta, timestamps |
+| `--ink-muted` | `#5F6875` | Secondary text, nav links, muted meta, timestamps (v2 fix: darkened from #6B7280 to meet WCAG AA 4.5:1) |
 | `--ink-faint` | `#9CA3AF` | Tertiary, disabled, empty-state placeholder |
 | `--rule-cool` | `#E6E5E0` | Hairline rules across the site (cool-leaning warm, to sit on paper without yellowing) |
 | `--rule-strong` | `#D7D5CE` | Card bezel outer ring, stronger dividers |
@@ -180,10 +180,10 @@ All ink-on-surface, brand-on-surface, and gold-on-surface combinations audited a
 |---|---|---|
 | `--ink` (#0A0A0B) on `--surface-paper` (#F7F6F3) | 19.5:1 | AAA |
 | `--ink` on `--surface-card` (#FFFFFF) | 20.1:1 | AAA |
-| `--ink-muted` (#6B7280) on `--surface-paper` | 4.6:1 | AA body |
+| `--ink-muted` (#5F6875) on `--surface-paper` | 5.22:1 | AA body (fixed v2 — was #6B7280 / 4.47 below AA) |
 | `--brand-primary` (#0C7C8A) on `--surface-paper` | 5.1:1 | AA body |
 | `--brand-primary` on `--surface-card` | 5.3:1 | AA body |
-| `--brand-gold-dark` (#92710A) on `--brand-gold-light` (#FFF8E7) | 5.7:1 | AA body |
+| `--brand-gold-dark` (#856708) on `--brand-gold-light` (#FFF8E7) | 5.03:1 | AA body (fixed v2 — was #92710A / 4.32 below AA) |
 | `--surface-paper` on `--brand-primary-dark` (#085A66) | 8.4:1 | AAA (CTA band inverse) |
 
 Unit test per pair. Real WCAG math, not axe-in-jsdom.
