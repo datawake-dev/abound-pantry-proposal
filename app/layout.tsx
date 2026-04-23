@@ -27,12 +27,12 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "OC Pantry Coordination Network: Proposal",
   description:
-    "A coordination data layer for Orange County food distribution. Open pantry directory, weekly distribution schedule, public read APIs. Owned by Abound Food Care, built and maintained by Datawake.",
+    "A coordination data layer for Orange County food distribution. Open pantry directory, weekly distribution schedule, public read APIs. Owned by Abound Food Care, built and maintained by Datawake, in collaboration with A Million Dreams Consulting.",
   robots: { index: true, follow: true },
   openGraph: {
     title: "OC Pantry Coordination Network: Proposal",
     description:
-      "A coordination data layer for Orange County food distribution. Owned by Abound Food Care, built by Datawake.",
+      "A coordination data layer for Orange County food distribution. Owned by Abound Food Care, built by Datawake in collaboration with A Million Dreams Consulting.",
     type: "website",
   },
 };
