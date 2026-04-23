@@ -1,9 +1,9 @@
 "use client";
 import { useMemo } from "react";
-import { LazyMotion, domAnimation, m } from "motion/react";
 import { FilterChips } from "@/components/map/FilterChips";
 import { DataTable } from "@/components/table/DataTable";
 import { FilterSnapshot } from "@/components/table/FilterSnapshot";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { useFilterContext } from "@/lib/filter-context";
 import { applyFilters } from "@/lib/map-filters";
 import { SITE } from "@/lib/site-data";
@@ -31,14 +31,7 @@ export default function SharedDatabase({ features }: { features: DistributionFea
     >
       <div className="atmosphere-teal" aria-hidden />
       <div className="relative mx-auto max-w-[1200px] px-6">
-        <LazyMotion features={domAnimation}>
-          <m.div
-            initial={{ opacity: 0, y: 24, filter: "blur(4px)" }}
-            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
-            className="max-w-[640px]"
-          >
+        <ScrollReveal className="max-w-[640px]">
             <span className="inline-flex items-center gap-[7px] rounded-full border border-[rgba(12,124,138,0.14)] bg-[rgba(12,124,138,0.07)] px-[10px] py-1 font-mono text-[9.5px] font-medium uppercase tracking-[0.18em] text-[var(--brand-primary-dark)]">
               <span
                 aria-hidden
@@ -65,8 +58,7 @@ export default function SharedDatabase({ features }: { features: DistributionFea
             >
               {copy.body}
             </p>
-          </m.div>
-        </LazyMotion>
+          </ScrollReveal>
 
         <div className="mt-10">
           <FilterChips state={state} onToggle={toggle} label={copy.filterLabel} />

@@ -1,5 +1,4 @@
-"use client";
-import { LazyMotion, domAnimation, m } from "motion/react";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { SITE } from "@/lib/site-data";
 
 /**
@@ -18,14 +17,8 @@ export default function Coordination() {
       className="relative overflow-hidden bg-[var(--surface-muted)] py-24 md:py-28"
     >
       <div className="mx-auto max-w-[1200px] px-6">
-        <LazyMotion features={domAnimation}>
           <div className="grid grid-cols-1 gap-12 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
-            <m.div
-              initial={{ opacity: 0, y: 24, filter: "blur(4px)" }}
-              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
-            >
+            <ScrollReveal>
               <span className="inline-flex items-center gap-[7px] rounded-full border border-[rgba(12,124,138,0.14)] bg-[rgba(12,124,138,0.07)] px-[10px] py-1 font-mono text-[9.5px] font-medium uppercase tracking-[0.18em] text-[var(--brand-primary-dark)]">
                 <span
                   aria-hidden
@@ -45,14 +38,11 @@ export default function Coordination() {
               >
                 {copy.body}
               </p>
-            </m.div>
+            </ScrollReveal>
 
             {/* Right — text exchange */}
-            <m.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.7, delay: 0.12, ease: [0.32, 0.72, 0, 1] }}
+            <ScrollReveal
+              delayMs={120}
               className="mx-auto w-full max-w-[380px] rounded-[1.75rem] bg-[rgba(10,10,11,0.04)] p-1.5 ring-1 ring-[rgba(10,10,11,0.06)]"
             >
               <div className="rounded-[calc(1.75rem-0.375rem)] bg-[var(--surface-card)] p-5 ss-float-card">
@@ -100,9 +90,8 @@ export default function Coordination() {
                   ))}
                 </ol>
               </div>
-            </m.div>
+            </ScrollReveal>
           </div>
-        </LazyMotion>
       </div>
     </section>
   );

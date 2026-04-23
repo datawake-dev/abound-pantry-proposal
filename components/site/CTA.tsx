@@ -1,6 +1,5 @@
-"use client";
-import { LazyMotion, domAnimation, m } from "motion/react";
 import { ArrowRight, CalendarBlank } from "@phosphor-icons/react/dist/ssr";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { SITE } from "@/lib/site-data";
 
 /**
@@ -31,13 +30,7 @@ export default function CTA() {
       />
 
       <div className="relative mx-auto max-w-[1100px] px-6 text-center">
-        <LazyMotion features={domAnimation}>
-          <m.div
-            initial={{ opacity: 0, y: 24, filter: "blur(4px)" }}
-            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
-          >
+          <ScrollReveal>
             <span
               className="inline-flex items-center gap-[7px] rounded-full border border-[var(--brand-gold-light)]/40 bg-[var(--brand-gold-light)]/10 px-[10px] py-1 font-mono text-[9.5px] font-medium uppercase tracking-[0.18em] text-[var(--brand-gold-light)]"
             >
@@ -94,8 +87,7 @@ export default function CTA() {
                 );
               })}
             </div>
-          </m.div>
-        </LazyMotion>
+          </ScrollReveal>
       </div>
     </section>
   );
