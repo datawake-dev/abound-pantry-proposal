@@ -312,7 +312,7 @@ export function InteractiveMap({ features }: InteractiveMapProps) {
           <div
             ref={containerRef}
             data-testid="map-canvas"
-            className="absolute inset-0"
+            className="h-full w-full"
             role="presentation"
           />
 
