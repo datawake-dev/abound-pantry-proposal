@@ -5,7 +5,11 @@ import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import type { DistributionFeature } from "@/lib/map-data";
 import { useFilterContext } from "@/lib/filter-context";
-import { applyFilters, type FilterKey } from "@/lib/map-filters";
+import {
+  applyFilters,
+  computeNeedsDryGoods,
+  type FilterKey,
+} from "@/lib/map-filters";
 import { MapTooltip } from "./MapTooltip";
 
 /**
@@ -60,10 +64,9 @@ function toMapLibreFilter(activeFilters: Set<FilterKey>): unknown[] | null {
         all.push(["==", ["get", "isOverlap"], true]);
         break;
       case "needs-dry-goods":
-        // Kept as client-side filter for the keyboard list. MapLibre's expr
-        // language cannot easily substring-match an array of needs, so the
-        // map-side filter passes through and applyFilters handles it for the
-        // keyboard alternative and the DataTable.
+        // A boolean property precomputed at source-add-time (see enriched
+        // below). Keeps the map + table + keyboard list in perfect sync.
+        all.push(["==", ["get", "needsDryGoods"], true]);
         break;
     }
   }
@@ -76,14 +79,40 @@ export function InteractiveMap({ features }: InteractiveMapProps) {
   const popupRef = useRef<maplibregl.Popup | null>(null);
   const popupRootRef = useRef<Root | null>(null);
   const popupNodeRef = useRef<HTMLDivElement | null>(null);
+  const styleLoadedRef = useRef(false);
+  // Cache the latest active filter set so the map's "load" callback can read
+  // the up-to-date value at the moment the style finishes loading, even if
+  // filters were toggled before that happened.
+  const activeFiltersRef = useRef<Set<FilterKey>>(new Set());
 
   const { state, setHighlightedId, highlightedId } = useFilterContext();
 
-  // The keyboard list and textual summary should reflect the full filter set
-  // (including needs-dry-goods). applyFilters is the single source of truth.
+  // Keep a ref to the latest filter set so the map's one-shot "load" callback
+  // can apply the correct filter even if state changed before load completed.
+  useEffect(() => {
+    activeFiltersRef.current = state.active;
+  }, [state]);
+
+  // The keyboard list and textual summary should reflect the full filter set.
+  // applyFilters is the single source of truth.
   const filtered = useMemo(() => applyFilters(features, state), [features, state]);
   const overlapFeatures = useMemo(
     () => features.filter((f) => f.properties.isOverlap),
+    [features],
+  );
+
+  // Enrich features with the derived `needsDryGoods` boolean so the MapLibre
+  // filter expression stays a simple `["==", ["get", "needsDryGoods"], true]`.
+  // Calculated once per render at a cost of O(N) string compares per feature.
+  const enrichedFeatures = useMemo(
+    () =>
+      features.map((f) => ({
+        ...f,
+        properties: {
+          ...f.properties,
+          needsDryGoods: computeNeedsDryGoods(f.properties.specificNeeds),
+        },
+      })),
     [features],
   );
 
@@ -119,11 +148,13 @@ export function InteractiveMap({ features }: InteractiveMapProps) {
     mapRef.current = map;
 
     map.on("load", () => {
+      styleLoadedRef.current = true;
+
       map.addSource("distributions", {
         type: "geojson",
         data: {
           type: "FeatureCollection",
-          features: features as unknown as GeoJSON.Feature[],
+          features: enrichedFeatures as unknown as GeoJSON.Feature[],
         },
       });
 
@@ -143,9 +174,32 @@ export function InteractiveMap({ features }: InteractiveMapProps) {
           "circle-stroke-color": "#FFFFFF",
           "circle-opacity": 0,
         },
-        // Reveal dots with a short transition so the hero orchestration
-        // doesn't pop them in all at once (DESIGN.md §5.5 step 7).
       });
+
+      // Highlight layer — renders a teal ring around the currently
+      // highlighted feature (driven by FilterContext: row hover, keyboard
+      // focus on a list button, or dot mouseenter). MapLibre auto-reprojects
+      // on pan/zoom so the ring stays glued to the dot.
+      map.addLayer({
+        id: "dots-highlight",
+        type: "circle",
+        source: "distributions",
+        filter: ["==", ["get", "id"], "__none__"],
+        paint: {
+          "circle-radius": ["interpolate", ["linear"], ["zoom"], 10, 9, 15, 14],
+          "circle-color": "rgba(0,0,0,0)",
+          "circle-stroke-color": "#0C7C8A",
+          "circle-stroke-width": 2.5,
+          "circle-stroke-opacity": 0.9,
+        },
+      });
+
+      // Apply any filter toggled before style load finished.
+      const initial = toMapLibreFilter(activeFiltersRef.current);
+      map.setFilter(
+        "dots",
+        initial as unknown as maplibregl.FilterSpecification,
+      );
 
       // Stagger in the dots.
       requestAnimationFrame(() => {
@@ -158,7 +212,10 @@ export function InteractiveMap({ features }: InteractiveMapProps) {
         if (!feat) return;
         const id = feat.properties?.id as string | undefined;
         if (id) setHighlightedId(id);
-        showPopup(feat.geometry as GeoJSON.Point, feat.properties as unknown as DistributionFeature["properties"]);
+        showPopup(
+          feat.geometry as GeoJSON.Point,
+          feat.properties as unknown as DistributionFeature["properties"],
+        );
       });
 
       map.on("mouseleave", "dots", () => {
@@ -206,26 +263,40 @@ export function InteractiveMap({ features }: InteractiveMapProps) {
       popupRootRef.current?.unmount();
       popupRootRef.current = null;
       popupNodeRef.current = null;
+      styleLoadedRef.current = false;
       map.remove();
       mapRef.current = null;
     };
-    // `features` is stable across the page's lifetime (server-computed, passed
-    // once). We intentionally do NOT include `setHighlightedId` or `features`
-    // in the dep array because the map is one-shot; filter changes propagate
-    // via the separate effect below.
+    // `enrichedFeatures` is derived from `features` which is stable across the
+    // page's lifetime (server-computed, passed once). The map is one-shot;
+    // filter and highlight changes propagate via the separate effects below.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Filter updates → MapLibre layer filter.
   useEffect(() => {
     const map = mapRef.current;
-    if (!map || !map.isStyleLoaded() || !map.getLayer("dots")) return;
+    if (!map || !styleLoadedRef.current || !map.getLayer("dots")) return;
     const layerFilter = toMapLibreFilter(state.active);
     map.setFilter(
       "dots",
       layerFilter as unknown as maplibregl.FilterSpecification,
     );
   }, [state]);
+
+  // Highlight updates → MapLibre highlight layer filter. Using a MapLibre
+  // layer (rather than an HTML overlay) lets pan/zoom keep the ring glued to
+  // the dot without extra projection bookkeeping.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !styleLoadedRef.current || !map.getLayer("dots-highlight"))
+      return;
+    const next = highlightedId ?? "__none__";
+    map.setFilter(
+      "dots-highlight",
+      ["==", ["get", "id"], next] as unknown as maplibregl.FilterSpecification,
+    );
+  }, [highlightedId]);
 
   const overlapCount = overlapFeatures.length;
 
@@ -245,7 +316,11 @@ export function InteractiveMap({ features }: InteractiveMapProps) {
             role="presentation"
           />
 
-          {/* Pulse overlay — SVG absolute, renders on top of canvas */}
+          {/* Pulse overlay — SVG absolute, renders on top of canvas.
+              Anchored to 50/50 of the map box; the overlap cluster sits near
+              the visual center of the Anaheim bounds so this is good enough
+              without per-tick map.project() calls. Refine only if/when the
+              bounds shift. */}
           {overlapCount > 0 && overlapCenter ? (
             <svg
               aria-hidden
@@ -275,41 +350,63 @@ export function InteractiveMap({ features }: InteractiveMapProps) {
             </svg>
           ) : null}
 
-          {/* Inbound highlight ring (table → map cross-hover) */}
+          {/* Highlight ring marker — kept as a data-* stub so tests can assert
+              cross-highlight wiring without coupling to MapLibre internals.
+              The visible ring itself is rendered by the dots-highlight
+              MapLibre layer (see useEffect above). */}
           {highlightedId ? (
-            <div
+            <span
               aria-hidden
               data-slot="highlight-ring"
               data-highlight-id={highlightedId}
-              className="pointer-events-none absolute left-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 rounded-full ring-2 ring-[var(--brand-primary)]"
+              className="sr-only"
             />
           ) : null}
         </div>
       </div>
 
-      {/* Visually-hidden keyboard alternative (DESIGN.md §11 a11y) */}
-      <ul className="sr-only" aria-label="Distribution sites list">
-        {filtered.map((f) => (
-          <li key={f.properties.id}>
-            <button
-              type="button"
-              data-feature-id={f.properties.id}
-              onFocus={() => setHighlightedId(f.properties.id)}
-              onBlur={() => setHighlightedId(null)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
-                  setHighlightedId(f.properties.id);
-                }
-              }}
-            >
-              {f.properties.name}, {f.properties.neighborhood}.{" "}
-              {f.properties.nextDistribution}.
-              {f.properties.isOverlap ? " Overlap flagged." : ""}
-            </button>
-          </li>
-        ))}
-      </ul>
+      {/* Keyboard alternative (DESIGN.md §11 a11y).
+          Visually hidden by default so the hero map owns the space, but the
+          wrapping region opts in to `focus-within` — once a keyboard user
+          tabs in, the list reveals in place so they're not tabbing through
+          invisible controls. Screen-reader users always get the list via the
+          sr-only semantics. */}
+      <div
+        className="focus-within:not-sr-only focus-within:block sr-only mt-4 rounded-[calc(1.75rem-0.375rem)] bg-[var(--surface-card)] p-4 ring-1 ring-[var(--rule-cool)]"
+        data-slot="keyboard-list-region"
+      >
+        <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--ink-muted)]">
+          Map locations, keyboard-accessible
+        </p>
+        <ul className="mt-3 space-y-2" aria-label="Distribution sites list">
+          {filtered.map((f) => (
+            <li key={f.properties.id}>
+              <button
+                type="button"
+                data-feature-id={f.properties.id}
+                onFocus={() => setHighlightedId(f.properties.id)}
+                onBlur={() => setHighlightedId(null)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    setHighlightedId(f.properties.id);
+                  }
+                }}
+                className="block w-full rounded-md border border-[var(--rule-cool)] bg-[var(--surface-card)] px-3 py-2 text-left text-[13px] text-[var(--ink)] transition-colors hover:border-[var(--brand-primary)] focus-visible:border-[var(--brand-primary)]"
+              >
+                <span className="font-medium">{f.properties.name}</span>
+                <span className="text-[var(--ink-muted)]">
+                  {" "}· {f.properties.neighborhood} · {f.properties.nextDistribution}
+                  {f.properties.storage.length > 0
+                    ? ` · ${f.properties.storage.join(" + ")} storage`
+                    : ""}
+                  {f.properties.isOverlap ? " · Overlap flagged" : ""}
+                </span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
 
       {/* Textual summary (DESIGN.md §11 map alternate) */}
       <figcaption

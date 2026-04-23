@@ -40,6 +40,7 @@ export function MapTooltip({ feature }: MapTooltipProps) {
         </div>
         {p.isOverlap ? (
           <span
+            role="img"
             aria-label="Overlap flagged"
             className="inline-flex items-center gap-1 rounded-full bg-[var(--brand-gold-light)] px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.16em] text-[var(--brand-gold-dark)]"
           >

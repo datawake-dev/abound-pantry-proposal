@@ -30,6 +30,19 @@ const DRY_GOODS_KEYWORDS = [
   "infant formula",
 ];
 
+/**
+ * Derive whether a pantry is asking for dry-goods restock from its
+ * specificNeeds list. Shared between applyFilters (used by DataTable + the
+ * keyboard list) and InteractiveMap (pre-computed into source properties so a
+ * single MapLibre filter expression can narrow the dots). Keeping both
+ * filters reading the same boolean prevents the "table filtered, map still
+ * shows everything" split-state bug.
+ */
+export function computeNeedsDryGoods(specificNeeds: string[]): boolean {
+  const needs = specificNeeds.map((n) => n.toLowerCase());
+  return needs.some((n) => DRY_GOODS_KEYWORDS.some((kw) => n.includes(kw)));
+}
+
 export function createEmptyFilterState(): FilterState {
   return { active: new Set() };
 }
@@ -57,12 +70,8 @@ function matchesFilter(feature: DistributionFeature, key: FilterKey): boolean {
       return p.storage.includes("cold");
     case "choice-market":
       return p.model === "choice";
-    case "needs-dry-goods": {
-      const needs = p.specificNeeds.map((n) => n.toLowerCase());
-      return needs.some((n) =>
-        DRY_GOODS_KEYWORDS.some((kw) => n.includes(kw)),
-      );
-    }
+    case "needs-dry-goods":
+      return computeNeedsDryGoods(p.specificNeeds);
     case "overlap-flagged":
       return p.isOverlap;
   }

@@ -17,7 +17,7 @@ import type { FilterKey, FilterState } from "@/lib/map-filters";
  */
 
 const CHIP_ORDER: Array<{ key: FilterKey; label: string }> = [
-  { key: "open-today", label: "Open today" },
+  { key: "open-today", label: "Capacity open" },
   { key: "cold-storage", label: "Cold storage" },
   { key: "choice-market", label: "Choice market" },
   { key: "needs-dry-goods", label: "Needs dry goods" },

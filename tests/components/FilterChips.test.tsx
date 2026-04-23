@@ -33,7 +33,7 @@ describe("FilterChips", () => {
   test("active chip has aria-pressed='true' and renders the close X glyph", () => {
     const active = toggleFilter(createEmptyFilterState(), "open-today");
     render(<FilterChips state={active} onToggle={() => {}} />);
-    const open = screen.getByRole("button", { name: /open today/i });
+    const open = screen.getByRole("button", { name: /capacity open/i });
     expect(open).toHaveAttribute("aria-pressed", "true");
     expect(open.querySelector("[data-slot=chip-close]")).not.toBeNull();
   });
