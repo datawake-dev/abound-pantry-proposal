@@ -136,6 +136,7 @@ function OverlapIndicator({ value }: { value: boolean }) {
   if (!value) return <span aria-hidden className="block h-2 w-2" />;
   return (
     <span
+      role="img"
       aria-label="Overlap flagged"
       className="inline-flex h-full items-center"
     >

@@ -89,8 +89,8 @@ export default function Coordination() {
                         <p
                           className={
                             bubble.speaker === "operator"
-                              ? "mt-1 text-right text-[10px] text-white/70"
-                              : "mt-1 text-[10px] text-[var(--ink-faint)]"
+                              ? "mt-1 text-right text-[10.5px] font-medium text-white"
+                              : "mt-1 text-[10.5px] text-[var(--ink-muted)]"
                           }
                         >
                           {bubble.author}

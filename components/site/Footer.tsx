@@ -16,7 +16,7 @@ export default function Footer() {
         >
           {copy.credit}
         </p>
-        <p className="max-w-[480px] text-[11.5px] text-[var(--ink-faint)]">
+        <p className="max-w-[480px] text-[11.5px] text-[var(--ink-muted)]">
           {copy.disclaimer}
         </p>
         <span

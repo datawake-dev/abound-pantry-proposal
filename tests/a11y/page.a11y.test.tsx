@@ -94,22 +94,29 @@ describe("Full page accessibility audit (DESIGN.md §11)", () => {
     }
   });
 
-  test("axe: no critical violations with DEFAULT rules (including color-contrast)", async () => {
+  test("axe: no critical or serious violations with DEFAULT rules (including color-contrast)", async () => {
     const { container } = render(<Page />);
     const results = await axe(container, {
       // Default rule set. We explicitly do NOT disable color-contrast per
       // PLAN-REVISIONS.md Task 22 — lib/contrast.ts is the authoritative
       // per-token source, but axe gets to flag anything it sees.
     });
-    const critical = (results.violations ?? []).filter(
-      (v) => v.impact === "critical",
+    // Serious or worse must block. Moderate/minor are surfaced below but do
+    // not fail the build; fix-on-sight is still the policy.
+    const blocking = (results.violations ?? []).filter(
+      (v) => v.impact === "critical" || v.impact === "serious",
     );
-    if (critical.length > 0) {
-      const summary = critical
-        .map((v) => `${v.id}: ${v.description}`)
-        .join("\n  ");
-      throw new Error(`Critical a11y violations:\n  ${summary}`);
+    if (blocking.length > 0) {
+      const summary = blocking
+        .map((v) => {
+          const nodes = v.nodes
+            .map((n) => `      - ${n.target.join(" ")}\n        ${n.html}`)
+            .join("\n");
+          return `${v.impact?.toUpperCase()} ${v.id}: ${v.description}\n${nodes}`;
+        })
+        .join("\n\n  ");
+      throw new Error(`Blocking a11y violations:\n  ${summary}`);
     }
-    expect(critical.length).toBe(0);
+    expect(blocking.length).toBe(0);
   });
 });
