@@ -3,6 +3,91 @@
 All notable changes to this project are tracked here. Dates are absolute
 (YYYY-MM-DD, Pacific Time).
 
+## v0.1.1 — 2026-04-22 — Review pass (strategy → spec → build)
+
+Critical review pass before Victoria's 2026-04-28 review. Walked the
+strategy doc → spec → DESIGN.md → built site chain looking for drift,
+then applied Codex's parallel code-review findings on top.
+
+### Shipped as real features (buttons that now do what they say)
+- **Case-manager cmdk search** filters on user input (was `shouldFilter=false`
+  + a fixed `filteredCount = results.length`, so typing did nothing).
+  Token-substring match against siteName + neighborhood + reasoning;
+  empty query shows all three results. `aria-live` now reflects actual
+  visible count.
+- **Escape from the case-manager detail panel** collapses back to results
+  and returns focus. Previously only worked while focus was inside
+  `<Command>`; selecting a result moved focus outside and Escape stopped
+  responding.
+- **Export CSV** in the data table now actually downloads an RFC-4180 CSV
+  of the currently filtered rows. Arrays joined with "; " so embedded
+  commas can't split fields.
+- **Copy API sample** in Public Infrastructure writes request + response
+  JSON to the clipboard with a transient Check-icon confirmation; has a
+  textarea fallback for contexts without `navigator.clipboard`.
+
+### Map fixes (broken product argument)
+- **Cross-highlight ring** now renders at the highlighted feature's actual
+  map position via a MapLibre `dots-highlight` layer filtered by id. Was
+  a fixed DOM ring at `left-1/2 top-1/2` — every row hover produced the
+  same centered circle. MapLibre auto-reprojects on pan/zoom.
+- **`needs-dry-goods` filter** now narrows map dots (was skipped with
+  a "kept client-side" comment, so the table narrowed while the map kept
+  everything — breaking the shared-filter argument). Pre-computes
+  `needsDryGoods` per feature so the MapLibre expression stays simple.
+- **Filter toggled before map load** is no longer lost; the load callback
+  applies the latest filter set via a ref.
+- **"Open today" chip renamed** to "Capacity open" — the filter checks
+  `capacityLabel === 'open'`, which is "currently has capacity," not
+  "open today." Match the label to the behavior.
+- **Keyboard list** now reveals on `focus-within` instead of hiding 20
+  `sr-only` focusable buttons. Screen readers still get the list from
+  first paint; keyboard users now see it when they tab in.
+
+### Accessibility
+- **Axe audit tightened to block on `serious` violations** (was `critical`
+  only, which was masking several real issues). Error message now dumps
+  selectors + HTML of every offending node.
+- **Overlap indicator** (table + map tooltip) now carries `role="img"` so
+  `aria-label` is allowed — axe was flagging these as
+  `aria-prohibited-attr`.
+- **Chat-bubble author bylines** bumped from `text-white/70` on teal
+  (~3.25:1 at 10px) to full white + medium weight, past AA.
+- **Footer disclaimer + LiveState caption** moved from `--ink-faint`
+  (~2.5:1, disabled-state token) to `--ink-muted` (5.22:1, body AA).
+
+### Performance
+- **Replaced Motion `whileInView` with a CSS-only `<ScrollReveal>`** +
+  one IntersectionObserver per reveal. Drops 9 `<LazyMotion>` trees and
+  their Motion observer setup off the client bundle. Sections without
+  client-only behavior (Problem, Picture, Coordination, LiveState, Team,
+  Scope, CTA, part of SharedDatabase) are now Server Components.
+- Current Lighthouse mobile, 4× CPU throttled, against production URL:
+  FCP 2.0s · **LCP 3.97s** (down marginally from 3.98s v0.1.0) ·
+  Speed Index 2.4s · TBT 131ms · CLS 0.000 · Perf 84.
+- Honest read: the LCP bottleneck isn't Motion — it's hydration time on
+  4× throttled mobile with opacity-0 reveal elements. Desktop/laptop
+  experience (the actual Victoria/Mike surface) renders in ~1s. The
+  grant-reviewer audience reads this on a laptop or meeting projector,
+  not a 4-year-old phone on 3G. Accepting and documenting.
+
+### Cleanup
+- Removed unused `shiki` dep (the API code block uses a hand-tuned
+  static token renderer, not Shiki runtime).
+- Deleted `_NotReady.tsx` scaffolding placeholder and
+  `PublicInfrastructureReveal.tsx` (stale wrapper after Shiki was
+  dropped).
+- Stripped dead `useState(open)` + sr-only toggle button in the Header.
+- Replaced document-title em-dash with a colon (slop-lint bans em-dash
+  in rendered copy; the title is rendered).
+- Scrubbed two false keyboard hints in SharedDatabase ("Arrow keys
+  navigate rows", "S sorts the focused column") — behaviors that don't
+  exist in the table implementation.
+
+### Tests / CI
+- 322 tests across 24 files still green.
+- TypeScript clean, ESLint 0 warnings, Next build succeeds.
+
 ## v0.1.0 — 2026-04-22 — Initial deploy
 
 **Live at:** https://abound-pantry-proposal.vercel.app
