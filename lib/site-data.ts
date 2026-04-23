@@ -214,8 +214,8 @@ export const SITE: Site = {
     body: "The map is one view of this data. The table is another. Same 20 representative Anaheim distribution sites, same filter state. Sort any column. Filter by capability. Export to CSV. Query via the public API.",
     hints: [
       "Hover a row to highlight its map dot",
-      "Arrow keys navigate rows",
-      "S sorts the focused column",
+      "Tab focuses rows; Enter or Space sorts on a column header",
+      "Click any chip above to filter both map and table",
     ],
     filterLabel: "Filter",
     footerTemplate: "{n} of {total} sites shown",

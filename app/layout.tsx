@@ -24,12 +24,12 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "OC Pantry Coordination Network — Proposal",
+  title: "OC Pantry Coordination Network: Proposal",
   description:
     "Shared food-rescue data for Orange County. Open directory, live distribution state, public APIs. Built with Abound Food Care.",
   robots: { index: true, follow: true },
   openGraph: {
-    title: "OC Pantry Coordination Network — Proposal",
+    title: "OC Pantry Coordination Network: Proposal",
     description:
       "Shared food-rescue data for Orange County. Built with Abound Food Care.",
     type: "website",

@@ -1,5 +1,3 @@
-"use client";
-import { useState } from "react";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import { SITE } from "@/lib/site-data";
 
@@ -14,7 +12,6 @@ import { SITE } from "@/lib/site-data";
  */
 
 export default function Header() {
-  const [open, setOpen] = useState(false);
   const nav = SITE.nav;
 
   return (
@@ -78,18 +75,6 @@ export default function Header() {
           </span>
         </a>
       </nav>
-
-      {/* Placeholder for future mobile menu — keeps the state ready */}
-      {open ? <span aria-hidden className="hidden" /> : null}
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        className="sr-only"
-        aria-hidden="true"
-        tabIndex={-1}
-      >
-        toggle
-      </button>
     </header>
   );
 }
