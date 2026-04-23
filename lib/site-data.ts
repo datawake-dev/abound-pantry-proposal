@@ -161,42 +161,42 @@ export const SITE: Site = {
     brand: "OC Pantry Coordination",
     proposalTag: "Proposal",
     links: [
-      { label: "The picture", href: "#picture" },
-      { label: "How it works", href: "#coordination" },
+      { label: "Planner view", href: "#picture" },
+      { label: "Pantry self-service", href: "#coordination" },
       { label: "Scope", href: "#scope" },
     ],
   },
 
   hero: {
-    eyebrow: "Coordination infrastructure",
+    eyebrow: "Proposal for Abound Food Care",
     headline: [
-      { text: "Shared food-rescue data for " },
+      { text: "A coordination data layer for " },
       { text: "Orange County", accent: "teal" },
-      { text: "." },
+      { text: " food distribution." },
     ],
     subline: {
-      lead: "Open directory.",
-      rest: " Live distribution state. Public APIs. Built with Abound Food Care.",
+      lead: "Open pantry directory.",
+      rest: " Weekly distribution schedule. Public read APIs. Owned by Abound Food Care, built and maintained by Datawake.",
     },
     ctas: [
       { label: "Read the proposal", href: "#shared-database", variant: "primary" },
       { label: "How it works", href: "#coordination", variant: "secondary" },
     ],
     overlapCaption: {
-      metric: "Sat 9:00am overlap",
-      body: "Three pantries within 300m of each other, same morning. The coordination layer surfaces this automatically.",
+      metric: "Sat 9:00am",
+      body: "Three pantries are scheduled within a 300m radius at the same hour. Representative of the overlap patterns the planner view flags.",
       disclaimer: "Representative demo data. Live coordination layer in development.",
     },
   },
 
   sharedDatabase: {
-    eyebrow: "The shared database",
+    eyebrow: "Directory",
     headline: [
       { text: "Pantries, grocery-store supply partners, and family resource centers. " },
       { text: "One map", accent: "teal" },
-      { text: ", one source of truth." },
+      { text: " and one table." },
     ],
-    body: "Church and community pantries, school shelves, mobile markets, appointment hubs, and the grocery stores supplying them. All in one record, every week. The map is one view of this data. The table is another. Same sites, same filter state. Sort any column. Filter by capability. Export to CSV. Query via the public API.",
+    body: "Church and community pantries, school shelves, mobile markets, appointment hubs, family resource centers, and the grocery stores supplying them. The map and the table are two views of the same records. Filter by capability. Export to CSV. Query the public read API. Participation is open to any food distribution site in the network.",
     hints: [
       "Hover a row to highlight its map dot",
       "Tab focuses rows; Enter or Space sorts on a column header",
@@ -207,50 +207,50 @@ export const SITE: Site = {
   },
 
   problem: {
-    eyebrow: "The problem",
-    headline: "A food-rescue system that cannot see itself.",
-    body: "Saturday morning in central Anaheim. Three pantries open at the same hour within a five-minute walk of each other. A block south, a fourth neighborhood has no distribution until Wednesday. Abound moves food at scale through this network every week. Second Harvest, 211 OC, CalOptima, and the coalition agencies each keep their own spreadsheets and calendars. Nobody can see the network at once. Not the overlaps. Not the gaps. Not which pantry is short on cold storage this Tuesday. The consequence shows up as duplicated distributions, stale profiles, and supply dispatched without live visibility into who has the capacity to accept it.",
+    eyebrow: "Current state",
+    headline: "What the current coordination picture looks like.",
+    body: "Saturday morning in central Anaheim. Three pantries open at the same hour within a five-minute walk of each other. A block south, a fourth neighborhood has no distribution until Wednesday. Abound moves food through this network every week. Second Harvest, 211 OC, CalOptima, and the coalition agencies each keep their own spreadsheets and calendars. No single source shows the whole network at the same time. The consequence is duplicated distributions, stale pantry profiles, and food dispatched without current visibility into which pantry has the capacity to accept it.",
   },
 
   picture: {
-    eyebrow: "The picture",
-    headline: "One shared picture, used by coalition leaders.",
-    body: "A coalition planner opens the view on Sunday night. A heat map layered with SNAP density, school homeless rosters, and the week's distribution calendar shows where supply is concentrated and where it is thin. The AI strategic brief ranks the overlaps and gaps in plain English, and proposes specific nudges to pantry owners: move a Saturday 9am distribution by 90 minutes, merge two neighboring church pantries, cover the 92804 Wednesday afternoon hole. No forced consolidation. The planner sends the nudge as a conversation, not a directive. Two weeks later the three pantry leads are in a room together. The tool does not decide. It makes the decision visible (representative projection).",
+    eyebrow: "Strategic planner view",
+    headline: "A planning view for food distribution leaders.",
+    body: "The planner view layers SNAP density, school homeless rosters, and the week's distribution calendar onto a coverage heat map. A weekly brief written by an LLM ranks the overlaps and gaps in plain English and drafts suggested nudges for specific pantries: shift a Saturday 9am distribution, merge two neighboring church pantries, cover a Wednesday afternoon gap. The planner sends each nudge to the pantry operator as a suggestion, not a directive. The operator decides. Projected shift effects are shown as (representative projection) until the live heat map ships in V1.",
     heatMap: {
-      heading: "Heat map · Central Anaheim",
+      heading: "Coverage heat map · Central Anaheim",
       legendLow: "Thin coverage",
       legendHigh: "Dense overlap",
-      overlayLabel: "Saturday 9am",
+      overlayLabel: "Saturday 9:00am",
       disclaimer: "Representative density layout. Live heat map ships in V1.",
     },
     nudge: {
-      heading: "AI nudge · Saturday 9am cluster",
+      heading: "Weekly brief · Saturday 9am cluster",
       summary:
-        "Three church pantries are open within a 300m radius on Saturday 9am. Meanwhile 92804 Wednesday afternoon has no coverage at all.",
+        "Three church pantries are scheduled within a 300m radius on Saturday at 9:00am. 92804 on Wednesday afternoon has no scheduled coverage.",
       actions: [
         {
           site: "St. Luke's Lutheran",
-          action: "Shift to Sunday 9am. Covers 92804 Wednesday hole. Box-to-choice upgrade.",
+          action: "Suggested shift to Sunday 9:00am. Covers the 92804 Wednesday gap. Upgrade from box to choice market.",
         },
         {
           site: "Community Presbyterian",
-          action: "Merge into Anaheim FRC Sat 9am choice market. Same block, more capacity.",
+          action: "Suggested merge into the Anaheim FRC Saturday 9:00am choice market. Same block, higher capacity.",
         },
         {
           site: "First Baptist Lincoln",
-          action: "Hold Saturday 9am. Anchor site with the best cold storage.",
+          action: "Hold Saturday 9:00am. Anchor site with the best cold storage on the block.",
         },
       ],
-      ctaLabel: "Send as conversation",
+      ctaLabel: "Draft messages to pantry leads",
       rationale:
-        "The planner is not sending orders. The platform drafts a short message to each pantry lead explaining the suggestion and asking if it would work. The pantry decides. The coordination layer just made the pattern visible.",
+        "The planner is not sending orders. The platform drafts a short message to each pantry lead explaining the suggestion and asking whether it works. The operator replies yes, no, or with a counter-suggestion. The pantry decides.",
     },
   },
 
   coordination: {
-    eyebrow: "Coordination without a login",
-    headline: "Pantries finally see their neighborhood.",
-    body: "For the first time, each pantry sees who else is distributing on their block, on their Saturday morning, and which supplies are moving where. They can tell the network what they are short on this week: pasta, diapers, cold storage, bilingual volunteers. That visibility is what earns the operator's time. Sunday night the platform sends each site a short message asking for the week ahead. The operator replies with capacity, specific needs, and any schedule changes in plain language. The AI parses the reply, updates both the site profile and the individual distribution state, and confirms back to the operator. Mid-week when Abound routes supply, the operator gets a text with the estimated composition and ETA. After the distribution the operator replies with the served count. The loop runs on the channels operators already use. No login, no app to install.",
+    eyebrow: "Pantry self-service",
+    headline: "How pantries update their information.",
+    body: "Each pantry operator can see which other pantries, mobile distributions, and supply pickups are scheduled nearby, and can tell the platform what the site is short on this week: pasta, diapers, cold storage, bilingual volunteers. On Sunday evening the platform sends each site a short SMS asking about the week ahead. The operator replies in plain language. An LLM parses the reply, updates the site profile and the individual distribution record, and confirms the interpretation back to the operator. Mid-week, when Abound routes food to the site, the operator gets a text with the estimated composition and ETA. After the distribution the operator replies with the served count. No login. No app install.",
     exchangeLabel: "Sample exchange · representative",
     bubbles: [
       {
@@ -277,9 +277,9 @@ export const SITE: Site = {
   },
 
   liveState: {
-    eyebrow: "The live state",
-    headline: "Abound opens one console every morning.",
-    body: "Supply pipeline on the left: today's scheduled pickups and estimated composition. Distribution calendar in the middle: every site in the network this week, color-coded by supply state. Routing queue on the right: AI-ranked assignments waiting on one-click confirmation. Alert bar up top catches gaps, overlaps, stale profiles. One screen. Live data pulled from the operator loop and the partner feeds. No spreadsheets taped over a dashboard.",
+    eyebrow: "Abound dispatch console",
+    headline: "The dispatch console used by the Abound team.",
+    body: "One screen. Supply pipeline on the left: today's scheduled pickups and estimated composition. Distribution calendar in the middle: every site in the network this week, color-coded by supply state. Routing queue on the right: LLM-ranked assignments waiting on one-click confirmation. Alert bar across the top flags gaps, overlaps, and stale profiles. Data pulls live from the pantry operator loop and the partner feeds.",
     timestamp: "Tue Apr 28 · 7:42 am PT",
     columns: [
       {
@@ -314,9 +314,9 @@ export const SITE: Site = {
   },
 
   caseManager: {
-    eyebrow: "A door for every family",
-    headline: "A case manager finds the right pantry in under a minute.",
-    body: "One search box. The case manager types what the family needs in plain English. Ranked results come back with the reasoning attached. Share a result with a family by text. No family account. No login for the case manager either, if the partner organization wants it that way. The feature runs on the same open data powering the rest of the site.",
+    eyebrow: "Case manager directory search",
+    headline: "Plain-English pantry search for case managers.",
+    body: "One search field. The case manager types what the family needs in plain English. Ranked pantry results come back with the reasoning attached: open hours, storage capability, distribution model, language support, walking distance, kid-friendly lobby, appointment requirements. The case manager can share a single result with the family by text. No family account is required. The partner organization can optionally require a case-manager login, or leave the search open. The search uses the same directory powering the rest of the site.",
     queryPrefill: "walkable 92804 open today spanish-speaking no appointment kid friendly",
     results: [
       {
@@ -339,14 +339,14 @@ export const SITE: Site = {
   },
 
   publicInfrastructure: {
-    eyebrow: "Public infrastructure",
-    headline: "Open source. Public APIs. Any county can fork it.",
-    body: "The codebase lives on GitHub under a permissive license. The API is documented with OpenAPI. Any county or coalition that wants this infrastructure can fork the repo, point it at their own data, and stand up their own network without a vendor lock or a custom build. Datawake maintains the upstream. Abound owns the Orange County instance and its data.",
+    eyebrow: "Open source and public APIs",
+    headline: "Open-source codebase. Documented read APIs.",
+    body: "The codebase lives in a public GitHub repository under an MIT or Apache 2.0 license. The read API is documented with an OpenAPI specification. Other counties or coalitions can fork the repository, point it at their own data, and run their own instance. Datawake maintains the upstream. Abound owns the Orange County instance and its data.",
     badges: [
       "GitHub",
       "OpenAPI",
       "MIT or Apache 2.0",
-      "Any county can fork",
+      "Forkable for other counties",
     ],
     apiRequest: "GET /api/v1/distributions?openToday=true&storage=cold",
     apiResponse: `{
@@ -368,23 +368,23 @@ export const SITE: Site = {
 
   team: {
     eyebrow: "Who is building this",
-    headline: "Three partners, three specific roles.",
+    headline: "Three partners and their roles.",
     partners: [
       {
         name: "Abound Food Care",
-        role: "Product owner · Grant applicant · Long-term operator",
+        role: "Product owner. Grant applicant. Long-term operator.",
         body: "Hosts the Orange County instance. Owns the operational data, the pantry relationships, and the routing decisions. The Abound dispatch team opens the console each morning and is accountable for the network.",
         initials: "AFC",
       },
       {
         name: "A Million Dreams Consulting",
-        role: "Co-product manager · Domain expert · Adoption lead",
-        body: "Coalition relationships across OC Hunger Alliance, 211 OC, CalOptima, and the school districts. Planner-view workflow design and rollout strategy.",
+        role: "Co-product manager. Domain expert. Adoption lead.",
+        body: "Holds the coalition relationships across the OC Hunger Alliance, 211 OC, CalOptima, and the Anaheim school districts. Leads the planner-view workflow design and the pantry rollout.",
         initials: "AMDC",
       },
       {
         name: "Datawake",
-        role: "Builder · Maintainer",
+        role: "Builder and maintainer.",
         body: "Software consultancy building the system. Long-term maintenance included. Open-source codebase on GitHub.",
         initials: "DW",
       },
@@ -393,46 +393,46 @@ export const SITE: Site = {
 
   scope: {
     eyebrow: "V1 scope and timeline",
-    headline: "What the first release delivers.",
+    headline: "V1 feature set.",
     bullets: [
       {
-        label: "Distribution directory",
-        body: "All represented sites with live profiles, storage capabilities, and schedule.",
+        label: "Pantry directory",
+        body: "Every participating site with current profile, storage capability, distribution model, and schedule.",
       },
       {
-        label: "Conversational pantry loop",
-        body: "Email and SMS capture, AI parsing, confirmation back to the operator. No login required.",
+        label: "Pantry self-service over SMS and email",
+        body: "Short messages capture weekly schedule changes, capacity, and specific needs. An LLM parses the reply and confirms the interpretation back to the operator. No login. No app install.",
       },
       {
-        label: "Abound console",
-        body: "Supply pipeline, distribution calendar, routing queue, alert bar.",
+        label: "Abound dispatch console",
+        body: "Supply pipeline, distribution calendar, LLM-ranked routing queue, alert bar.",
       },
       {
         label: "Strategic planner view",
-        body: "Heat map, weekly AI brief, planner-authored nudges to pantries suggesting they move or merge times and locations.",
+        body: "Coverage heat map, weekly brief from the LLM, and planner-drafted nudges suggesting pantries shift or merge their distribution times and locations.",
       },
       {
         label: "Case-manager search",
-        body: "Natural-language query with ranked results and plain-English reasoning.",
+        body: "Natural-language query field returning ranked pantries with plain-English reasoning.",
       },
       {
-        label: "Public OpenAPI",
-        body: "Read endpoints for the open data, documented and versioned.",
+        label: "Public read APIs",
+        body: "Read endpoints for the directory and schedule, documented and versioned with OpenAPI.",
       },
       {
         label: "Partner feeds",
-        body: "Imports from 211 OC, Second Harvest, and coalition agencies as their data contracts allow.",
+        body: "Imports from 211 OC and coalition agencies where data contracts allow. Second Harvest remains separate per their policy.",
       },
       {
         label: "Open-source release",
-        body: "GitHub repository, MIT or Apache 2.0 license, fork-ready for other counties.",
+        body: "Public GitHub repository under an MIT or Apache 2.0 license. Other counties can fork it.",
       },
     ],
     timeline: [
-      { when: "Grant award", what: "Kickoff, data contracts, governance model signed." },
-      { when: "Month 3", what: "MVP: directory, pantry loop, case-manager search." },
-      { when: "Month 6", what: "Full V1: Abound console, planner view, public API." },
-      { when: "Ongoing", what: "Maintenance, partner onboarding, quarterly release cycle." },
+      { when: "Grant award", what: "Kickoff. Data contracts. Governance model signed." },
+      { when: "Month 3", what: "MVP: directory, pantry self-service, case-manager search." },
+      { when: "Month 6", what: "Full V1: dispatch console, planner view, public read APIs." },
+      { when: "Ongoing", what: "Maintenance, partner onboarding, quarterly releases." },
     ],
   },
 

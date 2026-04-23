@@ -109,15 +109,16 @@ describe("Hero section", () => {
     const caption = screen.getByRole("note", { name: /overlap caption/i });
     expect(caption).toBeInTheDocument();
     expect(caption.textContent).toContain("Sat 9:00am");
-    // With no filters active, caption should NOT say "system cannot see this" —
-    // that phrase was replaced with a live-state description of the overlap.
+    // The caption was reworded away from "The system cannot see this" to a
+    // descriptive sentence about the overlap.
     expect(caption.textContent).not.toContain("system cannot see this");
     expect(caption.textContent).toContain("Three pantries");
+    expect(caption.textContent).toContain("300m");
   });
 
-  test("renders eyebrow 'Coordination infrastructure'", () => {
+  test("renders hero eyebrow", () => {
     renderHero();
-    expect(screen.getByText(/Coordination infrastructure/i)).toBeInTheDocument();
+    expect(screen.getByText(/Proposal for Abound Food Care/i)).toBeInTheDocument();
   });
 
   test("lazy-loaded InteractiveMap placeholder renders inside an aspect-ratio container", () => {
