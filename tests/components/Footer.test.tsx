@@ -8,11 +8,8 @@ describe("Footer", () => {
     expect(container.querySelector("footer")).not.toBeNull();
   });
 
-  test("contains credit + disclaimer text", () => {
+  test("contains the disclaimer text", () => {
     render(<Footer />);
-    expect(
-      screen.getByText(/Built with Abound Food Care by Datawake/),
-    ).toBeInTheDocument();
     expect(
       screen.getByText(/representative demo data/i),
     ).toBeInTheDocument();

@@ -175,14 +175,14 @@ export const SITE: Site = {
       { text: " food distribution." },
     ],
     subline: {
-      lead: "Open pantry directory.",
-      rest: " Weekly distribution schedule. Public read APIs. Owned by Abound Food Care, built and maintained by Datawake, in collaboration with A Million Dreams Consulting.",
+      lead: "An open pantry directory",
+      rest: " with a weekly distribution schedule and public read APIs, owned by Abound Food Care and built and maintained by Datawake, in collaboration with A Million Dreams Consulting.",
     },
     ctas: [],
     overlapCaption: {
       metric: "Sat 9:00am",
-      body: "Three pantries are scheduled within a 300m radius at the same hour. Representative of the overlap patterns the planner view flags.",
-      disclaimer: "Representative demo data. Live coordination layer in development.",
+      body: "Three pantries are scheduled to open within a 300m radius at the same hour, which is the kind of overlap pattern the planner view flags for coalition leaders to review.",
+      disclaimer: "The data shown is representative; the live coordination layer is in development.",
     },
   },
 
@@ -193,7 +193,7 @@ export const SITE: Site = {
       { text: "One map", accent: "teal" },
       { text: " and one database." },
     ],
-    body: "Church and community pantries, school shelves, mobile markets, appointment hubs, family resource centers, and the grocery stores supplying them. The map and the data table are two views of the same underlying database. Filter by capability. Export to CSV. Query the public read API. Participation is open to any food distribution site in the network.",
+    body: "The database covers church and community pantries, school shelves, mobile markets, appointment-based distribution hubs, family resource centers, and the grocery stores that supply them. The map and the data table are two views of the same records, so a filter applied in one view narrows both at once. Each record can be exported to CSV or queried through the public read API, and participation is open to any food distribution site operating in the network.",
     hints: [
       "Hover a row to highlight its map dot",
       "Tab focuses rows; Enter or Space sorts on a column header",
@@ -206,13 +206,13 @@ export const SITE: Site = {
   problem: {
     eyebrow: "Current state",
     headline: "What the current coordination picture looks like.",
-    body: "Saturday morning in central Anaheim. Three pantries open at the same hour within a five-minute walk of each other. A block south, a fourth neighborhood has no distribution until Wednesday. Abound moves food through this network every week. Second Harvest, 211 OC, CalOptima, and the coalition agencies each keep their own spreadsheets and calendars. No single source shows the whole network at the same time. The consequence is duplicated distributions, stale pantry profiles, and food dispatched without current visibility into which pantry has the capacity to accept it.",
+    body: "On a typical Saturday morning in central Anaheim, three pantries open within a five-minute walk of each other at the same hour, while a block south a fourth neighborhood has no distribution scheduled until Wednesday. Abound Food Care moves food through this network every week, but Second Harvest, 211 OC, CalOptima, and the other coalition agencies each maintain their own spreadsheets and calendars, and no single source shows the whole network at the same time. The result is duplicated distributions, pantry profiles that drift out of date, and food dispatched without current visibility into which sites actually have the capacity to accept it.",
   },
 
   picture: {
     eyebrow: "Strategic planner view",
     headline: "A planning view for food distribution leaders.",
-    body: "The planner view layers SNAP density, school homeless rosters, and the week's distribution calendar onto a coverage heat map. A weekly brief written by an LLM ranks the overlaps and gaps in plain English and drafts suggested nudges for specific pantries: shift a Saturday 9am distribution, merge two neighboring church pantries, cover a Wednesday afternoon gap. The planner sends each nudge to the pantry operator as a suggestion, not a directive. The operator decides. Projected shift effects are shown as (representative projection) until the live heat map ships in V1.",
+    body: "The planner view layers SNAP density, school homeless rosters, and the week's distribution calendar onto a coverage heat map, and a weekly brief written by an LLM ranks the overlaps and gaps in plain English. The brief drafts suggested nudges for specific pantries, such as shifting a Saturday 9am distribution, merging two neighboring church pantries, or covering a Wednesday afternoon gap in a ZIP code that currently has none. Each nudge goes to the pantry operator as a suggestion rather than a directive, and the operator decides whether to act on it. Projected effects are shown as (representative projection) until the live heat map ships in V1.",
     heatMap: {
       heading: "Coverage heat map · Central Anaheim",
       legendLow: "Thin coverage",
@@ -223,31 +223,31 @@ export const SITE: Site = {
     nudge: {
       heading: "Weekly brief · Saturday 9am cluster",
       summary:
-        "Three church pantries are scheduled within a 300m radius on Saturday at 9:00am. 92804 on Wednesday afternoon has no scheduled coverage.",
+        "Three church pantries are scheduled to open within a 300m radius on Saturday at 9:00am, while ZIP 92804 has no scheduled coverage on Wednesday afternoon.",
       actions: [
         {
           site: "St. Luke's Lutheran",
-          action: "Suggested shift to Sunday 9:00am. Covers the 92804 Wednesday gap. Upgrade from box to choice market.",
+          action: "Shift the Saturday distribution to Sunday at 9:00am to cover the 92804 Wednesday gap, and upgrade the site from a box model to a choice market.",
         },
         {
           site: "Community Presbyterian",
-          action: "Suggested merge into the Anaheim FRC Saturday 9:00am choice market. Same block, higher capacity.",
+          action: "Merge into the Anaheim FRC Saturday 9:00am choice market on the same block, which has more capacity than the current host site.",
         },
         {
           site: "First Baptist Lincoln",
-          action: "Hold Saturday 9:00am. Anchor site with the best cold storage on the block.",
+          action: "Hold the Saturday 9:00am distribution as the anchor site for the cluster, since this location has the best cold storage on the block.",
         },
       ],
       ctaLabel: "Draft messages to pantry leads",
       rationale:
-        "The planner is not sending orders. The platform drafts a short message to each pantry lead explaining the suggestion and asking whether it works. The operator replies yes, no, or with a counter-suggestion. The pantry decides.",
+        "The planner is not sending orders. Instead, the platform drafts a short message to each pantry lead explaining the suggestion and asking whether it would work, and the operator replies with a yes, a no, or a counter-suggestion of their own. The pantry decides.",
     },
   },
 
   coordination: {
     eyebrow: "Pantry self-service",
     headline: "How pantries update their information.",
-    body: "Each pantry operator can see which other pantries, mobile distributions, and supply pickups are scheduled nearby, and can tell the platform what the site is short on this week: pasta, diapers, cold storage, bilingual volunteers. On Sunday evening the platform sends each site a short SMS asking about the week ahead. The operator replies in plain language. An LLM parses the reply, updates the site profile and the individual distribution record, and confirms the interpretation back to the operator. Mid-week, when Abound routes food to the site, the operator gets a text with the estimated composition and ETA. After the distribution the operator replies with the served count. No login. No app install.",
+    body: "Each pantry operator can see which other pantries, mobile distributions, and supply pickups are scheduled nearby, and they can tell the platform what the site is short on in a given week, whether that is pasta, diapers, cold storage, or bilingual volunteers. On Sunday evenings the platform sends each site a short SMS asking about the week ahead, and the operator replies in plain language. An LLM parses the reply, updates the site profile and the individual distribution record, and confirms the interpretation back to the operator. Mid-week, when Abound routes food to the site, the operator receives a second text with the estimated composition and ETA, and after the distribution they reply with the served count. The entire loop runs over the operator's existing inbox, without a login or an app install.",
     exchangeLabel: "Sample exchange · representative",
     bubbles: [
       {
@@ -276,7 +276,7 @@ export const SITE: Site = {
   liveState: {
     eyebrow: "Abound dispatch console",
     headline: "The dispatch console used by the Abound team.",
-    body: "One screen. Supply pipeline on the left: today's scheduled pickups and estimated composition. Distribution calendar in the middle: every site in the network this week, color-coded by supply state. Routing queue on the right: LLM-ranked assignments waiting on one-click confirmation. Alert bar across the top flags gaps, overlaps, and stale profiles. Data pulls live from the pantry operator loop and the partner feeds.",
+    body: "The console presents the full network on a single screen. The left column shows the supply pipeline, including today's scheduled pickups and their estimated composition. The middle column is the distribution calendar, which lists every site in the network for the current week, color-coded by supply state. The right column is the routing queue, where LLM-ranked assignments wait on one-click confirmation. An alert bar across the top flags gaps, overlaps, and stale pantry profiles, and the entire view updates live from the pantry operator loop and the partner data feeds.",
     timestamp: "Tue Apr 28 · 7:42 am PT",
     columns: [
       {
@@ -307,29 +307,29 @@ export const SITE: Site = {
         ],
       },
     ],
-    caption: "Representative layout. The console lives in the Abound account post-deploy.",
+    caption: "Representative layout; the live console will run inside the Abound Food Care account once the platform ships.",
   },
 
   caseManager: {
     eyebrow: "Case manager directory search",
     headline: "Plain-English pantry search for case managers.",
-    body: "One search field. The case manager types what the family needs in plain English. Ranked pantry results come back with the reasoning attached: open hours, storage capability, distribution model, language support, walking distance, kid-friendly lobby, appointment requirements. The case manager can share a single result with the family by text. No family account is required. The partner organization can optionally require a case-manager login, or leave the search open. The search uses the same directory powering the rest of the site.",
+    body: "The case manager types what the family needs into a single search field in plain English, and the platform returns ranked pantry results with the reasoning attached, covering open hours, storage capability, distribution model, language support, walking distance, lobby environment, and appointment requirements. A case manager can share any single result with the family by text message, and no family-side account is required to receive it. The partner organization can optionally require a case-manager login or leave the search open to any staff member, and the search reads from the same directory that powers the rest of the site.",
     queryPrefill: "walkable 92804 open today spanish-speaking no appointment kid friendly",
     results: [
       {
         siteName: "Anaheim FRC",
         neighborhood: "Central Anaheim · 92802",
-        reasoning: "Open today until 5 pm. Choice market. Spanish-speaking volunteer on shift. Kid-friendly lobby. A short walk from 92804.",
+        reasoning: "Open today until 5 pm as a choice market, with a Spanish-speaking volunteer on shift and a kid-friendly lobby, a short walk from 92804.",
       },
       {
         siteName: "St. Mark's Tuesday pantry",
         neighborhood: "West Anaheim · 92804",
-        reasoning: "Opens today at 4 pm. Box model. Bilingual staff. No appointment required. Within the requested ZIP.",
+        reasoning: "Opens today at 4 pm as a box-model pantry with bilingual staff and no appointment required, inside the requested ZIP.",
       },
       {
         siteName: "Calvary Chapel Ball Rd",
         neighborhood: "South Anaheim · 92804",
-        reasoning: "Open this afternoon. Appointment-friendly drop-in lane available. Cold storage on site for dairy.",
+        reasoning: "Open this afternoon with an appointment-friendly drop-in lane and on-site cold storage for dairy.",
       },
     ],
     detailHeading: "Share this result",
@@ -338,7 +338,7 @@ export const SITE: Site = {
   publicInfrastructure: {
     eyebrow: "Open source and public APIs",
     headline: "Open-source codebase. Documented read APIs.",
-    body: "The codebase lives in a public GitHub repository under an MIT or Apache 2.0 license. The read API is documented with an OpenAPI specification. Other counties or coalitions can fork the repository, point it at their own data, and run their own instance. Datawake maintains the upstream. Abound owns the Orange County instance and its data.",
+    body: "The codebase lives in a public GitHub repository under an MIT or Apache 2.0 license, and the read API is documented with an OpenAPI specification. Other counties or coalitions that want the same infrastructure can fork the repository, point it at their own data, and run their own instance. Datawake maintains the upstream project, and Abound Food Care owns the Orange County instance along with the data within it.",
     badges: [
       "GitHub",
       "OpenAPI",
@@ -369,20 +369,20 @@ export const SITE: Site = {
     partners: [
       {
         name: "Abound Food Care",
-        role: "Product owner. Grant applicant. Long-term operator.",
-        body: "Hosts the Orange County instance. Owns the operational data, the pantry relationships, and the routing decisions. The Abound dispatch team opens the console each morning and is accountable for the network.",
+        role: "Product owner, grant applicant, long-term operator",
+        body: "Abound Food Care hosts the Orange County instance and owns the operational data, the pantry relationships, and the routing decisions. The Abound dispatch team opens the console each morning and is accountable for the health of the network as a whole.",
         initials: "AFC",
       },
       {
         name: "A Million Dreams Consulting",
-        role: "Co-product manager. Domain expert. Adoption lead.",
-        body: "Holds the coalition relationships across the OC Hunger Alliance, 211 OC, CalOptima, and the Anaheim school districts. Leads the planner-view workflow design and the pantry rollout.",
+        role: "Co-product manager, domain expert, adoption lead",
+        body: "A Million Dreams Consulting holds the coalition relationships across the OC Hunger Alliance, 211 OC, CalOptima, and the Anaheim school districts, and leads both the planner-view workflow design and the rollout to participating pantries.",
         initials: "AMDC",
       },
       {
         name: "Datawake",
-        role: "Builder and maintainer.",
-        body: "Software consultancy building the system. Long-term maintenance included. Open-source codebase on GitHub.",
+        role: "Builder and maintainer",
+        body: "Datawake is the software consultancy building the system, and long-term maintenance is included in the engagement. The codebase is open source on GitHub, and Datawake maintains the upstream project across instances.",
         initials: "DW",
       },
     ],
@@ -394,23 +394,23 @@ export const SITE: Site = {
     bullets: [
       {
         label: "Pantry directory",
-        body: "Every participating site with current profile, storage capability, distribution model, and schedule.",
+        body: "Every participating site is listed with its current profile, storage capability, distribution model, and weekly schedule.",
       },
       {
         label: "Pantry self-service over SMS and email",
-        body: "Short messages capture weekly schedule changes, capacity, and specific needs. An LLM parses the reply and confirms the interpretation back to the operator. No login. No app install.",
+        body: "Short messages capture weekly schedule changes, capacity, and specific needs, and an LLM parses each reply and confirms the interpretation back to the operator without requiring a login or an app install.",
       },
       {
         label: "Abound dispatch console",
-        body: "Supply pipeline, distribution calendar, LLM-ranked routing queue, alert bar.",
+        body: "A single screen combining the supply pipeline, the distribution calendar, an LLM-ranked routing queue, and an alert bar for gaps, overlaps, and stale profiles.",
       },
       {
         label: "Strategic planner view",
-        body: "Coverage heat map, weekly brief from the LLM, and planner-drafted nudges suggesting pantries shift or merge their distribution times and locations.",
+        body: "A coverage heat map with a weekly LLM-authored brief and planner-drafted nudges suggesting pantries shift or merge their distribution times and locations.",
       },
       {
         label: "Case-manager search",
-        body: "Natural-language query field returning ranked pantries with plain-English reasoning.",
+        body: "A natural-language query field that returns ranked pantries with plain-English reasoning attached to each result.",
       },
       {
         label: "Public read APIs",
@@ -418,23 +418,23 @@ export const SITE: Site = {
       },
       {
         label: "Partner feeds",
-        body: "Imports from 211 OC and coalition agencies where data contracts allow. Second Harvest remains separate per their policy.",
+        body: "Imports from 211 OC and coalition agencies where data-sharing contracts allow, while Second Harvest remains separate in keeping with their policy.",
       },
       {
         label: "Open-source release",
-        body: "Public GitHub repository under an MIT or Apache 2.0 license. Other counties can fork it.",
+        body: "A public GitHub repository under an MIT or Apache 2.0 license, available for other counties or coalitions to fork and deploy.",
       },
     ],
     timeline: [
-      { when: "Grant award", what: "Kickoff. Data contracts. Governance model signed." },
-      { when: "Month 3", what: "MVP: directory, pantry self-service, case-manager search." },
-      { when: "Month 6", what: "Full V1: dispatch console, planner view, public read APIs." },
-      { when: "Ongoing", what: "Maintenance, partner onboarding, quarterly releases." },
+      { when: "Grant award", what: "Project kickoff, data-sharing contracts, and a signed governance model." },
+      { when: "Month 3", what: "MVP release covering the directory, pantry self-service, and case-manager search." },
+      { when: "Month 6", what: "Full V1 adds the dispatch console, the planner view, and the public read APIs." },
+      { when: "Ongoing", what: "Ongoing maintenance, partner onboarding, and a quarterly release cadence." },
     ],
   },
 
   footer: {
-    credit: "Built with Abound Food Care by Datawake. © 2026.",
-    disclaimer: "All distribution data shown is representative demo data. Live coordination layer in development.",
+    credit: "",
+    disclaimer: "All distribution data shown is representative demo data, and the live coordination layer is still in development.",
   },
 };

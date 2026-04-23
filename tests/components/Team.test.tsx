@@ -15,21 +15,19 @@ describe("Team section", () => {
     expect(h3s.length).toBe(3);
   });
 
-  test("Datawake card body matches the flattened PLAN-REVISIONS copy exactly", () => {
+  test("Datawake card body covers scope, maintenance, and open-source facts", () => {
     render(<Team />);
     const article = screen
       .getByText("Datawake", { selector: "h3" })
       .closest("article");
     expect(article).not.toBeNull();
-    expect(article!.textContent).toContain(
-      "Software consultancy building the system.",
-    );
-    expect(article!.textContent).toContain("Long-term maintenance included.");
-    expect(article!.textContent).toContain("Open-source codebase on GitHub.");
-    expect(article!.textContent!.toLowerCase()).not.toContain(
-      "production-grade",
-    );
-    expect(article!.textContent!.toLowerCase()).not.toContain("cutting-edge");
+    const text = article!.textContent!.toLowerCase();
+    expect(text).toContain("software consultancy");
+    expect(text).toContain("long-term maintenance");
+    expect(text).toMatch(/open[-\s]source/);
+    expect(text).toContain("github");
+    expect(text).not.toContain("production-grade");
+    expect(text).not.toContain("cutting-edge");
   });
 
   test("all three partners named", () => {

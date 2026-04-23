@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, DM_Sans } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { ScrollRestoration } from "@/components/ui/ScrollRestoration";
 
@@ -62,6 +63,12 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://tiles.openfreemap.org" />
       </head>
       <body className="bg-surface-paper text-ink min-h-full flex flex-col">
+        {/* Scroll-to-top before hydration. Runs synchronously before the
+            React tree mounts so the browser does not paint at the
+            previously restored offset and then snap to top afterwards. */}
+        <Script id="scroll-restoration-init" strategy="beforeInteractive">
+          {`try{if('scrollRestoration' in history){history.scrollRestoration='manual'}if(!location.hash){window.scrollTo(0,0)}}catch(e){}`}
+        </Script>
         <ScrollRestoration />
         {children}
       </body>

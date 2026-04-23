@@ -79,17 +79,15 @@ describe("SITE copy honors the scrub table from PLAN-REVISIONS.md", () => {
     expect(SITE.caseManager.body).not.toMatch(/0\.6[- ]mile/i);
   });
 
-  test("Datawake team card uses flattened three-sentence copy", () => {
+  test("Datawake team card covers the required facts in narrative form", () => {
     const datawake = SITE.team.partners.find((p) => p.name === "Datawake");
     expect(datawake).toBeDefined();
-    expect(datawake!.body).toContain(
-      "Software consultancy building the system.",
-    );
-    expect(datawake!.body).toContain("Long-term maintenance included.");
-    expect(datawake!.body).toContain(
-      "Open-source codebase on GitHub.",
-    );
-    expect(datawake!.body.toLowerCase()).not.toContain("production-grade");
-    expect(datawake!.body.toLowerCase()).not.toContain("cutting-edge");
+    const body = datawake!.body.toLowerCase();
+    expect(body).toContain("software consultancy");
+    expect(body).toContain("long-term maintenance");
+    expect(body).toMatch(/open[-\s]source/);
+    expect(body).toContain("github");
+    expect(body).not.toContain("production-grade");
+    expect(body).not.toContain("cutting-edge");
   });
 });
