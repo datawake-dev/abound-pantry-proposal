@@ -178,10 +178,7 @@ export const SITE: Site = {
       lead: "Open pantry directory.",
       rest: " Weekly distribution schedule. Public read APIs. Owned by Abound Food Care, built and maintained by Datawake, in collaboration with A Million Dreams Consulting.",
     },
-    ctas: [
-      { label: "Read the proposal", href: "#shared-database", variant: "primary" },
-      { label: "How it works", href: "#coordination", variant: "secondary" },
-    ],
+    ctas: [],
     overlapCaption: {
       metric: "Sat 9:00am",
       body: "Three pantries are scheduled within a 300m radius at the same hour. Representative of the overlap patterns the planner view flags.",

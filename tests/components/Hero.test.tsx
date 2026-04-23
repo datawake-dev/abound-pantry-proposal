@@ -88,12 +88,11 @@ describe("Hero section", () => {
     expect(accentSpan!.className).toContain("text-[var(--brand-primary)]");
   });
 
-  test("Primary + Secondary CTAs render with correct hrefs", () => {
+  test("Hero does not render hero-level CTA buttons", () => {
     renderHero();
-    const primary = screen.getByRole("link", { name: /Read the proposal/i });
-    expect(primary.getAttribute("href")).toBe("#shared-database");
-    const secondary = screen.getByRole("link", { name: /How it works/i });
-    expect(secondary.getAttribute("href")).toBe("#coordination");
+    // CTAs were removed — they were redundant with the nav and the scroll.
+    expect(screen.queryByRole("link", { name: /Read the proposal/i })).toBeNull();
+    expect(screen.queryByRole("link", { name: /How it works/i })).toBeNull();
   });
 
   test("Hero does NOT render FilterChips — chips belong in SharedDatabase", () => {
