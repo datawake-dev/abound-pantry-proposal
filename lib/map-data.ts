@@ -1,3 +1,5 @@
+import type { Feature, FeatureCollection, Point } from "geojson";
+
 export type DistributionType = "pantry" | "frc" | "school" | "mobile" | "appointment";
 export type CapacityLabel = "open" | "partial" | "full" | "closed";
 export type DistributionModel = "box" | "choice";
@@ -17,8 +19,8 @@ export interface DistributionFeatureProperties {
   isOverlap: boolean;
 }
 
-export type DistributionFeature = GeoJSON.Feature<GeoJSON.Point, DistributionFeatureProperties>;
-export type DistributionFeatureCollection = GeoJSON.FeatureCollection<
-  GeoJSON.Point,
+export type DistributionFeature = Feature<Point, DistributionFeatureProperties>;
+export type DistributionFeatureCollection = FeatureCollection<
+  Point,
   DistributionFeatureProperties
 >;
