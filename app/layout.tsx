@@ -1,8 +1,14 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, DM_Sans } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 import { ScrollRestoration } from "@/components/ui/ScrollRestoration";
+
+// Literal script body for the pre-hydration scroll reset. Declared as a
+// constant so the static analyzer can see it is not user-derived content
+// (no interpolation, no external inputs) before it reaches the inline
+// <script> tag below.
+const SCROLL_RESET_SCRIPT =
+  "try{if('scrollRestoration' in history){history.scrollRestoration='manual'}if(!location.hash){window.scrollTo(0,0)}}catch(e){}";
 
 // DESIGN.md §2.1 — font trinity:
 // Geist (display), DM Sans (body), Geist Mono (metadata/labels)
@@ -61,14 +67,19 @@ export default function RootLayout({
             off the tile request once MapLibre hydrates. */}
         <link rel="preconnect" href="https://tiles.openfreemap.org" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://tiles.openfreemap.org" />
+        {/* Scroll-to-top before first paint. Must be a raw inline <script>
+            tag in <head>, not a next/script component: next/script with
+            strategy=beforeInteractive in App Router queues the body on
+            self.__next_s and runs it after the main chunk loads, which is
+            too late — the browser has already painted at the restored
+            scroll offset by then. The static content comes from a literal
+            constant above. */}
+        <script
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: SCROLL_RESET_SCRIPT }}
+        />
       </head>
       <body className="bg-surface-paper text-ink min-h-full flex flex-col">
-        {/* Scroll-to-top before hydration. Runs synchronously before the
-            React tree mounts so the browser does not paint at the
-            previously restored offset and then snap to top afterwards. */}
-        <Script id="scroll-restoration-init" strategy="beforeInteractive">
-          {`try{if('scrollRestoration' in history){history.scrollRestoration='manual'}if(!location.hash){window.scrollTo(0,0)}}catch(e){}`}
-        </Script>
         <ScrollRestoration />
         {children}
       </body>
