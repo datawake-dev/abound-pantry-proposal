@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import type { DistributionFeatureCollection } from "@/lib/map-data";
+import { FilterProvider } from "@/lib/filter-context";
 import Header from "@/components/site/Header";
 import Footer from "@/components/site/Footer";
 import Hero from "@/components/site/Hero";
@@ -26,7 +27,7 @@ const distributions = JSON.parse(
 
 export default function Page() {
   return (
-    <>
+    <FilterProvider>
       <Header />
       <main>
         <Hero features={distributions.features} />
@@ -42,6 +43,6 @@ export default function Page() {
         <CTA />
       </main>
       <Footer />
-    </>
+    </FilterProvider>
   );
 }
