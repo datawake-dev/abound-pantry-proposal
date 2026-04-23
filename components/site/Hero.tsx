@@ -1,9 +1,28 @@
 "use client";
 import { ArrowRight, ArrowDown } from "@phosphor-icons/react/dist/ssr";
 import { LazyMotion, domAnimation, m } from "motion/react";
+import dynamic from "next/dynamic";
 import type { DistributionFeature } from "@/lib/map-data";
-import { InteractiveMap } from "@/components/map/InteractiveMap";
 import { SITE } from "@/lib/site-data";
+
+// Defer MapLibre GL JS out of the initial bundle. The hero reveal timeline
+// fades the map in at t=600ms anyway (DESIGN.md §5.5 step 6), so pushing the
+// ~160KB MapLibre chunk past LCP is consistent with the orchestration.
+const InteractiveMap = dynamic(
+  () => import("@/components/map/InteractiveMap").then((m) => m.InteractiveMap),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="p-1.5 rounded-[1.75rem] bg-[rgba(10,10,11,0.04)] ring-1 ring-[rgba(10,10,11,0.06)]">
+        <div
+          className="rounded-[calc(1.75rem-0.375rem)] bg-[var(--surface-muted)] ss-float-card"
+          style={{ aspectRatio: "16 / 9", minHeight: "360px" }}
+          aria-hidden
+        />
+      </div>
+    ),
+  },
+);
 
 const EASE_EDITORIAL = [0.32, 0.72, 0, 1] as const;
 

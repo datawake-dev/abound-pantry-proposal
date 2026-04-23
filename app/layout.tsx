@@ -53,6 +53,13 @@ export default function RootLayout({
       lang="en"
       className={`${geist.variable} ${geistMono.variable} ${dmSans.variable} h-full antialiased`}
     >
+      <head>
+        {/* Preconnect to the OpenFreeMap tile CDN — the map loads post-LCP
+            but warming the TCP + TLS handshake early shaves a few hundred ms
+            off the tile request once MapLibre hydrates. */}
+        <link rel="preconnect" href="https://tiles.openfreemap.org" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://tiles.openfreemap.org" />
+      </head>
       <body className="bg-surface-paper text-ink min-h-full flex flex-col">
         {children}
       </body>

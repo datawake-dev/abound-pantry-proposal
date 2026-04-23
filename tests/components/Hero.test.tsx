@@ -117,10 +117,13 @@ describe("Hero section", () => {
     expect(screen.getByText(/Coordination infrastructure/i)).toBeInTheDocument();
   });
 
-  test("composes InteractiveMap — textual summary is reachable", () => {
+  test("lazy-loaded InteractiveMap placeholder renders inside an aspect-ratio container", () => {
     renderHero();
-    expect(
-      screen.getByText(/Representative distribution sites in Anaheim/i),
-    ).toBeInTheDocument();
+    // Since Task 27b — InteractiveMap is lazy-loaded to keep MapLibre out of
+    // the initial bundle. The Hero renders a CLS-safe placeholder; the map
+    // hydrates past LCP. The textual summary is covered by the a11y test
+    // where the full page renders (map included).
+    const placeholder = document.querySelector('[style*="aspect-ratio: 16 / 9"]');
+    expect(placeholder).not.toBeNull();
   });
 });
